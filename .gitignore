@@ -81,5 +81,18 @@ build/
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
+
+# Python virtual environments & bytecode
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Zip Archives
+*.zip
+*.tar.gz
