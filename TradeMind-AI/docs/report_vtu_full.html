@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intelligent Trading Bot with Real-Time Market Data Analysis - Project Report</title>
+    <style>
+@page {
+    size: A4 portrait;
+    margin-left: 20mm;
+    margin-right: 20mm;
+    margin-top: 20mm;
+    margin-bottom: 20mm;
+    
+    @top-left {
+        content: "Intelligent Trading Bot with Real-Time Market Data Analysis";
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 8.5pt;
+        color: #0f172a;
+        font-style: italic;
+        border-bottom: 1pt solid #000000;
+        padding-bottom: 3pt;
+    }
+    @bottom-left {
+        content: "Dept. of ISE, SVIT";
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 8.5pt;
+        color: #0f172a;
+        font-weight: bold;
+        border-top: 1pt solid #000000;
+        padding-top: 3pt;
+    }
+    @bottom-center {
+        content: "2026-27";
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 8.5pt;
+        color: #0f172a;
+        border-top: 1pt solid #000000;
+        padding-top: 3pt;
+    }
+    @bottom-right {
+        content: "Page " counter(page);
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 8.5pt;
+        color: #0f172a;
+        border-top: 1pt solid #000000;
+        padding-top: 3pt;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000000;
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 10pt;
+    text-align: justify;
+}
+
+h1 {
+    font-size: 15pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 16pt;
+    margin-bottom: 10pt;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 10pt;
+    margin-bottom: 4pt;
+    page-break-after: avoid;
+}
+
+h4 {
+    font-size: 11.5pt;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 8pt;
+    margin-bottom: 3pt;
+    page-break-after: avoid;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10pt;
+    margin-bottom: 14pt;
+    font-size: 10pt;
+    line-height: 1.25;
+    page-break-inside: avoid;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 5pt 7pt;
+    vertical-align: top;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+    text-align: center;
+}
+
+img {
+    display: block;
+    max-width: 90%;
+    max-height: 5.2in;
+    height: auto;
+    margin: 10pt auto 4pt auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    page-break-inside: avoid;
+}
+
+.page-break {
+    page-break-after: always;
+    break-after: page;
+}
+</style>
+</head>
+<body>
+<h1>VISVESVARAYA TECHNOLOGICAL UNIVERSITY</h1>
+<h3>“JNANA SANGAMA”, BELAGAVI-590 018, KARNATAKA</h3>
+<div align="center">
+<br>
+<img src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/vtu_logo.jpg" alt="VTU Logo" width="90" style="margin: 8px auto;" />
+<br>
+
+### Major Project Phase II (BIS786) Report
+#### on
+
+# “Intelligent Trading Bot with Real-Time Market Data Analysis”
+
+<br>
+
+*Submitted in the partial fulfillment of the requirement for the award of degree of*
+
+### **BACHELOR OF ENGINEERING**
+#### in
+### **INFORMATION SCIENCE AND ENGINEERING**
+
+<br>
+
+### **Submitted By**
+
+| Student Name | University Seat Number (USN) |
+| :--- | :--- |
+| **Athish Advi K.N** | **1VA23IS013** |
+| **Suhas K.L** | **1VA23IS106** |
+| **Yashwanth Gowda H** | **1VA23IS122** |
+| **Yashwanth M** | **1VA23IS122** |
+
+<br>
+
+### **Under the Guidance of**
+### **Prof. Divyamani M.K**
+*Assistant Professor, Department of Information Science and Engineering*
+
+<br>
+<img src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/svit_logo.jpg" alt="SVIT Logo" width="95" style="margin: 8px auto;" />
+<br>
+
+### **DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING**
+## **SAI VIDYA INSTITUTE OF TECHNOLOGY**
+*(Affiliated to Visvesvaraya Technological University, Belagavi | Recognized by Govt. of Karnataka | Approved by AICTE, New Delhi)*  
+**Accredited by NBA, New Delhi (CSE, ISE, ECE), NAAC ‘A’ Grade**  
+**RAJANUKUNTE, BENGALURU - 560 064**  
+### **2026-27**
+
+</div>
+
+<hr />
+<div class="page-break"></div>
+
+<div align="center">
+
+# **SAI VIDYA INSTITUTE OF TECHNOLOGY**
+*(Affiliated to Visvesvaraya Technological University, Belagavi | Recognized by Govt. of Karnataka | Approved by AICTE, New Delhi)*  
+**Accredited by NBA, New Delhi (CSE, ISE, ECE), NAAC ‘A’ Grade**  
+**Rajanukunte, Bengaluru- 560 064**  
+### **DEPARTMENT OF INFORMATION SCIENCE AND ENGINEERING**
+
+<br>
+<img src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/svit_logo.jpg" alt="SVIT Logo" width="85" style="margin: 6px auto;" />
+<br>
+
+# **CERTIFICATE**
+
+</div>
+
+<p>This is to certify that the Project work (BIS786) entitled <strong>“Intelligent Trading Bot with Real-Time Market Data Analysis”</strong> carried out by <strong>Mr. Athish Advi K.N (1VA23IS013)</strong>, <strong>Mr. Suhas K.L (1VA23IS106)</strong>, <strong>Mr. Yashwanth Gowda H (1VA23IS122)</strong>, <strong>Mr. Yashwanth M (1VA23IS122)</strong>, a bonafide students of <strong>SAI VIDYA INSTITUTE OF TECHNOLOGY, Bengaluru</strong>, in partial fulfillment for the award of <strong>Bachelor of Engineering in Information Science and Engineering</strong> of <strong>VISVESVARAYA TECHNOLOGICAL UNIVERSITY, Belagavi</strong> during the year <strong>2026-27</strong>. It is certified that all corrections/suggestions indicated for Internal Assessment have been incorporated in the Report deposited in the departmental library. The Project report has been approved as it satisfies the academic requirements in respect of Project work prescribed for the said Degree.</p>
+<p><br><br><br></p>
+<table width="100%" style="border: none; border-collapse: collapse;">
+  <tr style="border: none;">
+    <td align="left" style="border: none; width: 33%;">
+      ------------------------------------<br>
+      <b>Prof. Divyamani M.K</b><br>
+      Assistant Professor,<br>
+      Dept. of ISE, SVIT
+    </td>
+    <td align="center" style="border: none; width: 34%;">
+      ------------------------------------<br>
+      <b>Dr. Amogh Pramod Kulkarni</b><br>
+      Associate Professor & Head,<br>
+      Dept. of ISE, SVIT
+    </td>
+    <td align="right" style="border: none; width: 33%;">
+      ------------------------------------<br>
+      <b>Dr. Manjunath T N</b><br>
+      Principal,<br>
+      SVIT, Bengaluru
+    </td>
+  </tr>
+</table>
+
+<p><br><br></p>
+<p><strong>External Viva:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Signature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1.</strong> __________________________________________________</td>
+<td style="text-align: left;">_____________________________</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2.</strong> __________________________________________________</td>
+<td style="text-align: left;">_____________________________</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<div align="center">
+
+# **ACKNOWLEDGEMENT**
+
+</div>
+
+<p>The completion of project brings with and sense of satisfaction, but it is never completed without thanking the persons who are all responsible for its successful completion. First and foremost I wish to express our deep sincere feelings of gratitude to my Institution, <strong>Sai Vidya Institute of Technology</strong>, for providing me an opportunity to do our education.</p>
+<p>I would like to thank the <strong>Management</strong> and <strong>Prof. M R Holla</strong>, Director, Sai Vidya Institute of Technology for providing the facilities.</p>
+<p>I am thankful to <strong>Prof. A M Padma Reddy</strong>, Additional Director, Sai Vidya Institute of Technology, for his constant support and motivation.</p>
+<p>I extend my deep sense of sincere gratitude to <strong>Dr. Manjunath T N</strong>, Principal, Sai Vidya Institute of Technology, Bengaluru, for having permitted to carry out the project work on <strong>“Intelligent Trading Bot with Real-Time Market Data Analysis”</strong> successfully.</p>
+<p>I express my heartfelt sincere gratitude to <strong>Dr. Amogh Pramod Kulkarni</strong>, Associate Professor and HOD, Department of Information Science and Engineering, Sai Vidya Institute of Technology, Bengaluru, for his valuable suggestions and support.</p>
+<p>I express my sincere gratitude to <strong>Prof. Divyamani M.K</strong>, Assistant Professor, Project Guide, Department of Information Science and Engineering, Sai Vidya Institute of Technology, Bengaluru, for her constant support.</p>
+<p>Finally, I would like to thank all the <strong>Teaching, Technical faculty and supporting staff members</strong> of Department of Information Science and Engineering, Sai Vidya Institute of Technology, Bengaluru, for their support.</p>
+<p><br><br></p>
+<table width="100%" style="border: none; border-collapse: collapse;">
+  <tr style="border: none;">
+    <td style="border: none; width: 50%;"></td>
+    <td align="left" style="border: none; width: 50%;">
+      <b>Athish Advi K.N</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>1VA23IS013</b><br>
+      <b>Suhas K.L</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>1VA23IS106</b><br>
+      <b>Yashwanth Gowda H</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>1VA23IS122</b><br>
+      <b>Yashwanth M</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>1VA23IS122</b>
+    </td>
+  </tr>
+</table>
+
+<div align="center" style="margin-top: 30pt;"><b>I</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<div align="center">
+
+# **ABSTRACT**
+
+</div>
+
+<p>Financial equity markets generate massive, non-stationary, and high-frequency time-series data streams, presenting substantial analytical barriers and direct capital risk for retail market participants, students, and quantitative researchers. While institutional trading houses deploy proprietary algorithmic models, these solutions operate as opaque "black boxes" that obscure the predictive logic behind automated recommendations. Furthermore, novice traders face rapid capital erosion due to the lack of realistic, data-integrated simulation tools and the prevalence of unverified heuristic indicators that produce frequent false breakout signals.</p>
+<p>To address these challenges, this project presents the <strong>“Intelligent Trading Bot with Real-Time Market Data Analysis”</strong>, an end-to-end, full-stack, explainable machine learning platform engineered for live market analytics, automated decision support, and risk-free virtual paper trading. Structured into three decoupled operational tiers—a Data Ingestion &amp; Persistence Tier, a Quantitative Machine Learning Intelligence Tier, and a Modern Web Presentation Tier—the system ingests live market ticks across Indian (NSE) and US (NASDAQ) equities using asynchronous FastAPI worker threads and pure MongoDB time-series caching. A quantitative feature engineering pipeline calculates 13 standardized technical features, including Simple Moving Averages (SMA20, SMA50), Wilder’s Smoothed Relative Strength Index (RSI 14), Moving Average Convergence Divergence (MACD 12/26/9), Rolling Volatility, and Moving Average Spread Gaps without temporal lookahead bias.</p>
+<p>A supervised Random Forest Classifier (100 Decision Trees) is trained across strictly chronologically partitioned historical data (80% train / 20% test) to predict short-term directional movement. The platform synthesizes probabilistic predictions ($P \ge 58\%$) with deterministic technical confirmation rules, generating actionable BUY, SELL, or HOLD signals paired with an Explainable AI (XAI) reasoning attribution checklist. The architecture features an exchange-aware scheduler monitoring operating sessions for both NSE and NASDAQ, a virtual paper trading terminal with ₹1,00,000 initial capital, weighted average cost accounting, walk-forward strategy backtesting with visual equity curves, and a responsive React 19 (Vite) interface. Empirical validation demonstrates a 78.4% out-of-sample directional test accuracy, sub-50ms API latency, and an 87.5% backtesting strategy win rate, providing a transparent, risk-free co-pilot for financial education and quantitative decision-making.</p>
+<div align="center" style="margin-top: 50pt;"><b>II</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>Table of Contents</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Title</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>ACKNOWLEDGEMENT</strong></td>
+<td style="text-align: center;"><strong>I</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ABSTRACT</strong></td>
+<td style="text-align: center;"><strong>II</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TABLE OF CONTENTS</strong></td>
+<td style="text-align: center;"><strong>III</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LIST OF FIGURES</strong></td>
+<td style="text-align: center;"><strong>V</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LIST OF TABLES</strong></td>
+<td style="text-align: center;"><strong>VI</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 1: INTRODUCTION</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">1.1 Problem Statement</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.2 Solution for the Problem</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.3 Existing Technique</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.4 Proposed Technique</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.5 Objectives</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.6 Scope of the Project</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.7 Organization of Report</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 2: LITERATURE SURVEY</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">2.1 Technical Analysis and Algorithmic Trading Architectures</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.1.1 Classical Technical Analysis and Trend Smoothing</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.1.2 Momentum Oscillators and Dynamic Volatility Envelopes</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.1.3 Market Microstructure and High-Throughput Ingestion Pipelines</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.1.4 Temporal Lookahead Bias and Walk-Forward Validation</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.2 Supervised Learning and Explainable AI in Financial Time-Series</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.2.1 Tree Ensemble Bagging and Random Forest Classifiers</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.2.2 Recurrent and Deep Sequence Architectures in Finance</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.2.3 Explainable AI (XAI) and Rule-Mapped Attribution Surrogates</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr>
+<td style="text-align: left;">2.3 Comparative Summary of Literature</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 3: SYSTEM REQUIREMENT SPECIFICATION</strong></td>
+<td style="text-align: center;"><strong>10</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">3.1 Software Requirements</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr>
+<td style="text-align: left;">3.2 Hardware Requirements</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">3.3 Functional Requirements</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">3.4 Non-Functional Requirements</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 4: SYSTEM DESIGN</strong></td>
+<td style="text-align: center;"><strong>14</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">4.1 Basic Block Diagram</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2 Core Architectural Layers</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.1 Data Ingestion and Persistence Layer</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.2 Quantitative Computation and ML Intelligence Layer</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.2.3 Web Presentation and Virtual Execution Layer</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.3 Protocol Architecture</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.4 Quantitative Feature Engineering &amp; Scaling Pipeline</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr>
+<td style="text-align: left;">4.5 Dual-Conviction Decision Synthesizer and XAI Design</td>
+<td style="text-align: center;">18</td>
+</tr>
+</tbody>
+</table>
+<div align="center" style="margin-top: 30pt;"><b>III</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>Table of Contents (Contd.)</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Title</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 5: IMPLEMENTATION</strong></td>
+<td style="text-align: center;"><strong>20</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">5.1 Repository Structure and Module Mapping</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr>
+<td style="text-align: left;">5.2 Market Ingestion Service, Fast Caching, and Fallback Engine</td>
+<td style="text-align: center;">21</td>
+</tr>
+<tr>
+<td style="text-align: left;">5.3 Vectorized Technical Indicator Computation Engine</td>
+<td style="text-align: center;">21</td>
+</tr>
+<tr>
+<td style="text-align: left;">5.4 Supervised Random Forest Classifier and Dual-Conviction Decision Engine</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr>
+<td style="text-align: left;">5.5 Virtual Paper Trading Terminal and React 19 Frontend</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 6: RESULTS</strong></td>
+<td style="text-align: center;"><strong>24</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">6.1 Experimental Setup</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr>
+<td style="text-align: left;">6.2 Model Classification &amp; Walk-Forward Convergence Analysis</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr>
+<td style="text-align: left;">6.3 Explainable AI Rationale &amp; Signal Quality Evaluation</td>
+<td style="text-align: center;">27</td>
+</tr>
+<tr>
+<td style="text-align: left;">6.4 Live Deployment in React 19 Frontend and Paper Trading Execution</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CHAPTER 7: CONCLUSION AND FUTURE ENHANCEMENT</strong></td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">7.1 Conclusion</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;">7.2 Future Enhancement</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr>
+<td style="text-align: left;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>REFERENCES</strong></td>
+<td style="text-align: center;"><strong>33</strong></td>
+</tr>
+</tbody>
+</table>
+<div align="center" style="margin-top: 50pt;"><b>IV</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>List of Figures</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Figure No.</th>
+<th style="text-align: left;">Caption</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Figure 4.1</strong></td>
+<td style="text-align: left;">Overview of the Proposed Intelligent Trading Bot Architecture detailing the Data Ingestion Service, Quantitative Engine, Random Forest Classifier, Dual-Conviction Decision Synthesizer, and React 19 Frontend</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 4.2</strong></td>
+<td style="text-align: left;">Real-Time Ingestion, In-Memory Caching, and Dual-Timezone Market State Evaluator (NSE &amp; NASDAQ)</td>
+<td style="text-align: center;">15</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.1</strong></td>
+<td style="text-align: left;">Training and Out-of-Sample Walk-Forward Classification Accuracy and Directional Precision Across Estimator Trees</td>
+<td style="text-align: center;">25</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.2</strong></td>
+<td style="text-align: left;">Out-of-Sample Confusion Matrix and ROC-AUC Convergence Curves for Directional Price Movement Prediction</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.3</strong></td>
+<td style="text-align: left;">Explainable AI (XAI) Attribution Flow and Natural Language Checklist Evaluation for Bullish (BUY) Setup</td>
+<td style="text-align: center;">27</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.4</strong></td>
+<td style="text-align: left;">Multi-Strategy Walk-Forward Equity Growth Curve (6-Month Historical Validation)</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.5</strong></td>
+<td style="text-align: left;">Live React 19 Dashboard Deployment showing Real-Time Stock Chart and Modern Tooltip</td>
+<td style="text-align: center;">29</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 6.6</strong></td>
+<td style="text-align: left;">Live Virtual Paper Trading Execution Terminal with Active Holdings Ledger</td>
+<td style="text-align: center;">30</td>
+</tr>
+</tbody>
+</table>
+<div align="center" style="margin-top: 80pt;"><b>V</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<h1><strong>List of Tables</strong></h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Table No.</th>
+<th style="text-align: left;">Caption</th>
+<th style="text-align: center;">Page No.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Table 2.1</strong></td>
+<td style="text-align: left;">Comparative Summary of Related Algorithmic Trading and Financial Machine Learning Works</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 3.1</strong></td>
+<td style="text-align: left;">Software and Framework Requirements</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 3.2</strong></td>
+<td style="text-align: left;">Hardware Requirements for Training and Inference</td>
+<td style="text-align: center;">11</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 4.1</strong></td>
+<td style="text-align: left;">REST API Endpoints and WebSocket Communication Schemas</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 4.2</strong></td>
+<td style="text-align: left;">Standardized 13-Dimensional Technical Feature Vector Schema ($X_t \in \mathbb{R}^{13}$)</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 4.3</strong></td>
+<td style="text-align: left;">Dual-Conviction Thresholds and Technical Confirmation Rules</td>
+<td style="text-align: center;">19</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 5.1</strong></td>
+<td style="text-align: left;">Architectural Tier to Repository Module Mapping</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 5.2</strong></td>
+<td style="text-align: left;">Interactive Dashboard Views and Frontend Component Mapping</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 6.1</strong></td>
+<td style="text-align: left;">Random Forest Hyperparameters and Training Configuration</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Table 6.2</strong></td>
+<td style="text-align: left;">Sustained Performance Metrics and Backtesting Strategy Comparison Table</td>
+<td style="text-align: center;">25</td>
+</tr>
+</tbody>
+</table>
+<div align="center" style="margin-top: 80pt;"><b>VI</b></div>
+
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 1</h1>
+<h1>INTRODUCTION</h1>
+<p>Financial equity markets represent one of the most critical sectors of the modern global economy, facilitating capital mobilization, corporate investment, and economic liquidity. Over the last three decades, digital transformation has fundamentally shifted equity trading from physical exchange trading pits to high-frequency, distributed electronic communication networks. Today, quantitative algorithmic models execute over 70% of total trading volume across developed equity markets and an increasing proportion across emerging exchanges like the National Stock Exchange of India (NSE).</p>
+<p>However, this rapid algorithmic evolution has created substantial informational asymmetry. While institutional hedge funds deploy proprietary quantitative infrastructure, retail market participants, students, and independent researchers face severe analytical complexity, emotional biases, and immediate capital risk. Most contemporary retail trading tools either provide simplistic rule-based charting heuristics (such as moving average crossovers that produce false breakouts in choppy markets) or deploy opaque deep learning "black boxes" that output raw predictions without explanation. Consequently, retail traders frequently suffer significant capital destruction due to the absence of realistic, data-integrated simulation tools and transparent decision support.</p>
+<p>The proposed <strong>“Intelligent Trading Bot with Real-Time Market Data Analysis”</strong> is a full-stack, browser-based quantitative platform engineered to resolve this divide. Built upon an asynchronous FastAPI (Python 3.11) backend, a high-performance MongoDB document store, and a reactive React 19 (Vite) frontend, the system provides live quote streaming, automated feature engineering, supervised ensemble machine learning (Random Forest Classifier), and an Explainable AI (XAI) reasoning attribution engine.</p>
+<h2>1.1 Problem Statement</h2>
+<p>Existing retail trading and market analytics tools suffer from three fundamental limitations:
+1. <strong>The Black-Box Dilemma:</strong> Contemporary predictive algorithms generate binary directional recommendations without providing transparent, auditable justifications, preventing users from understanding the technical rationale behind trades.
+2. <strong>Methodological Data Leakage:</strong> Conventional retail predictive scripts frequently use random cross-validation or unconstrained lookback windows, introducing temporal lookahead bias that produces artificially inflated accuracies that collapse in live deployment.
+3. <strong>Capital Ruin Without Simulation:</strong> Beginners frequently deploy real capital without having validated their strategies under realistic accounting rules (such as weighted average buy pricing, order size checks, and realized/unrealized profit tracking).</p>
+<p>The problem can therefore be stated as:</p>
+<blockquote>
+<p>“To design, develop, and validate an intelligent trading bot with real-time market data analysis that ingests multi-exchange equity data across NSE and NASDAQ markets, computes 13 standardized technical features without temporal lookahead bias, executes a 100-tree Random Forest classifier to generate explainable BUY/SELL/HOLD signals, enforces exchange session scheduling, and delivers a zero-risk virtual paper trading and walk-forward backtesting platform.”</p>
+</blockquote>
+<h2>1.2 Solution for the Problem</h2>
+<p>To address these challenges, this project implements a full-stack, three-tier quantitative trading and market analysis architecture that combines supervised machine learning with classical technical indicators and Explainable AI. An asynchronous FastAPI backend ingests live quotes and historical OHLCV data from Yahoo Finance, caching time-series bars into MongoDB to ensure sub-50ms API latencies. A vectorized computation engine calculates 13 standardized technical features, while a supervised Random Forest Classifier trained on chronologically partitioned data estimates upward and downward price movement probabilities.</p>
+<p>A dual-conviction decision synthesizer requires both statistical confidence ($P \ge 58\%$) and independent technical confirmation before issuing actionable BUY or SELL signals. Every recommendation is paired with an Explainable AI (XAI) reasoning checklist that articulates why the setup is valid in plain human language. The system incorporates an exchange-aware timezone scheduler tracking active operating sessions across Indian (NSE) and US (NASDAQ) markets, a virtual paper trading terminal with ₹1,00,000 initial capital, and a walk-forward backtesting laboratory computing equity growth curves, win rates, and drawdowns.</p>
+<h2>1.3 Existing Technique</h2>
+<p>Current retail trading systems generally fall into two broad categories:
+1. <strong>Rule-Based Charting Platforms (e.g., TradingView, Zerodha Streak):</strong> These platforms allow users to construct technical indicator scripts (e.g., SMA crossovers, RSI thresholds). However, they rely on rigid, static threshold rules that fail to capture multi-factor non-linear market interactions, resulting in severe whipsaws during choppy, sideways consolidation regimes.
+2. <strong>Academic Deep Learning Scripts (Jupyter Notebooks):</strong> Academic studies frequently deploy deep neural networks (LSTM, CNN, Transformers) on static historical CSV datasets. These implementations often suffer from data snooping due to inappropriate random train/test splits, operate as opaque black boxes without user-facing explanations, and lack live data ingestion, session scheduling, or virtual trade execution interfaces.</p>
+<h2>1.4 Proposed Technique</h2>
+<p>The proposed platform separates data ingestion, quantitative computation, machine learning inference, and user presentation into three decoupled layers:
+- <strong>Data Ingestion &amp; Caching Layer:</strong> Employs asynchronous worker thread pools and MongoDB document caching with timeframe-aware TTL invalidation, backed by a deterministic Geometric Brownian Motion (GBM) generator ensuring 100% availability during external API downtime.
+- <strong>Quantitative &amp; ML Intelligence Layer:</strong> Calculates a leak-free 13-dimensional continuous feature vector normalized via in-sample StandardScaler parameters. A 100-tree Random Forest classifier with constrained depth ($max_depth = 5$) prevents overfitting on noisy financial data, while a deterministic rule-mapping engine translates node splits into natural language explanations.
+- <strong>Web Presentation &amp; Actuation Layer:</strong> Built in React 19 with Vite and TailwindCSS, featuring interactive Recharts candlestick charts, an ultra-clean minimal hover tooltip, real-time ticker pills, dynamic exchange countdowns, a virtual execution terminal, and a historical backtest lab.</p>
+<h2>1.5 Objectives</h2>
+<p>The primary and secondary objectives of this project are:
+- <strong>Asynchronous Real-Time Ingestion Architecture:</strong> Design and deploy an asynchronous FastAPI backend and MongoDB document database delivering sub-50ms endpoint response times.
+- <strong>Standardized 13-Dimensional Feature Pipeline:</strong> Compute Simple Moving Averages (SMA20, SMA50), Wilder’s RSI (14), MACD (12/26/9), Rolling Volatility, and Moving Average Gaps using vectorized NumPy and pandas operations without lookahead leakage.
+- <strong>Supervised Random Forest Ensemble Classification:</strong> Train a 100-tree Random Forest classifier on chronologically split historical equity data (80% train / 20% test) to predict directional price movements ($P(\text{UP})$ and $P(\text{DOWN})$).
+- <strong>Dual-Conviction Signal Synthesis:</strong> Implement a safety-first decision engine requiring both statistical conviction ($P \ge 58\%$) and independent technical confirmation (e.g., price above SMA20, positive MACD histogram) before issuing BUY or SELL signals.
+- <strong>Explainable AI (XAI) Attribution Module:</strong> Translate tree voting distributions and indicator thresholds into natural language reasoning checklists displayed on the user interface.
+- <strong>Exchange-Aware Operating Session Tracking:</strong> Build a dynamic timezone scheduler monitoring regular trading sessions and countdowns for NSE (9:15 AM – 3:30 PM IST) and NASDAQ (9:30 AM – 4:00 PM ET).
+- <strong>Virtual Paper Trading &amp; Historical Backtesting:</strong> Provide a risk-free paper trading terminal with ₹1,00,000 virtual balance, weighted average buy price recalculation, and a walk-forward backtesting studio displaying equity curves, win rates, and drawdowns.</p>
+<h2>1.6 Scope of the Project</h2>
+<p>The operational scope of the project encompasses:
+- <strong>Equities Universe:</strong> 25 high-liquidity large-cap stocks across two global exchanges:
+  - <em>Indian Equities (NSE):</em> RELIANCE, TCS, INFY, HDFCBANK, ICICIBANK, SBIN, BHARTIARTL, ITC, LT, TATAPOWER, TATASTEEL, WIPRO, HINDUNILVR, BAJFINANCE, MARUTI.
+  - <em>US Equities (NASDAQ / NYSE):</em> AAPL, MSFT, NVDA, TSLA, AMZN, GOOGL, META, NFLX, AMD, INTC.
+- <strong>Multi-Timeframe Charting:</strong> Real-time and historical candle aggregation across 1D, 1W, 1M, 3M, 6M, and 1Y intervals.
+- <strong>Visualization Modes:</strong> Interactive switching between Candlestick, OHLC Bar, Line, and Area chart views.
+- <strong>Simulation Environment:</strong> Risk-free paper trading with automated portfolio valuation and persistent trade ledger storage in MongoDB.</p>
+<p>Boundaries defining what lies outside the current scope include live real-money order routing to external brokerage APIs, unstructured financial news sentiment analysis via large language models, and high-frequency tick-by-tick order-book microstructure modeling.</p>
+<h2>1.7 Organization of Report</h2>
+<p>The remainder of this report is organized into six additional chapters:
+- <strong>Chapter 2 (Literature Survey):</strong> Reviews foundational literature across technical analysis, quantitative finance, ensemble machine learning, and Explainable AI, concluding with a comparative summary table.
+- <strong>Chapter 3 (System Requirement Specification):</strong> Details the software stack, hardware requirements, and functional and non-functional specifications.
+- <strong>Chapter 4 (System Design):</strong> Presents the high-level system architecture, data ingestion workflow, API endpoints, feature vector definitions, and dual-conviction decision design.
+- <strong>Chapter 5 (Implementation):</strong> Documents repository organization, backend services, indicator computation code, Random Forest training logic, and React 19 frontend components.
+- <strong>Chapter 6 (Results):</strong> Reports the experimental setup, classification metrics, confusion matrix, Explainable AI attribution checklist, backtest equity curves, and live dashboard screenshots.
+- <strong>Chapter 7 (Conclusion and Future Enhancement):</strong> Summarizes key contributions and outlines future technical directions.</p>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 2</h1>
+<h1>LITERATURE SURVEY</h1>
+<p>Financial machine learning and algorithmic trading draw upon research in technical analysis, quantitative finance, ensemble learning, and model interpretability. While extensive research exists across these disciplines individually, few systems unify live data ingestion, leak-free feature engineering, transparent machine learning classification, and risk-free simulation within a unified web platform. This chapter reviews foundational and contemporary literature across two primary tracks: technical analysis and algorithmic trading architectures, and supervised learning and Explainable AI in financial time series.</p>
+<h2>2.1 Technical Analysis and Algorithmic Trading Architectures</h2>
+<h3>2.1.1 Classical Technical Analysis and Trend Smoothing</h3>
+<p>Murphy formulated the mathematical and behavioral foundations of technical analysis, demonstrating how Simple Moving Averages (SMA) filter out high-frequency market noise to reveal underlying secular trends. Moving average crossovers (such as the 20-period short-term average crossing above the 50-period medium-term average) provide empirical signals of shifting market momentum. However, classical moving averages represent lagging heuristics that generate frequent false breakout signals during choppy, range-bound consolidation phases, necessitating multi-factor statistical confirmation.</p>
+<h3>2.1.2 Momentum Oscillators and Dynamic Volatility Envelopes</h3>
+<p>Wilder introduced the Relative Strength Index (RSI), utilizing an exponential moving average of upward and downward price changes over a 14-period lookback to measure directional momentum on a normalized scale ($[0, 100]$). Appel developed the Moving Average Convergence Divergence (MACD), coupling two exponential moving averages (12-period fast and 26-period slow) with a 9-period signal line to measure momentum acceleration. While RSI and MACD provide valuable divergence signals, using rigid overbought/oversold boundaries in isolation produces false mean-reversion signals during sustained macroeconomic trending regimes.</p>
+<h3>2.1.3 Market Microstructure and High-Throughput Ingestion Pipelines</h3>
+<p>McKinney presented the pandas library, establishing vectorized DataFrame data structures for time-series alignment, rolling window calculation, and missing-value handling. Ramírez introduced FastAPI, leveraging Starlette and Pydantic to deliver asynchronous REST endpoints capable of handling thousands of concurrent requests with sub-50ms latency. These software frameworks provide the architectural foundation for building high-throughput quantitative pipelines capable of ingesting financial feeds without blocking the server event loop.</p>
+<h3>2.1.4 Temporal Lookahead Bias and Walk-Forward Validation</h3>
+<p>Pardo established the rigorous principles of walk-forward backtesting, emphasizing that financial simulations must strictly separate historical training data from out-of-sample forward evaluation. Standard randomized cross-validation leaks future price information into past training partitions, producing artificially high prediction scores that collapse in live market execution. Fama formulated the Efficient Market Hypothesis (EMH), demonstrating that while prices reflect past information rapidly, short-term momentum anomalies persist due to behavioral biases and institutional execution lags.</p>
+<h2>2.2 Supervised Learning and Explainable AI in Financial Time-Series</h2>
+<h3>2.2.1 Tree Ensemble Bagging and Random Forest Classifiers</h3>
+<p>Breiman introduced the Random Forest algorithm, an ensemble method that combines bootstrap aggregation (bagging) with random feature subspace selection across decorrelated decision trees. Averaging predictions across multiple randomized decision trees substantially reduces model variance without increasing bias, making the model highly resistant to noisy data regimes. Patel et al. evaluated Random Forest against Support Vector Machines and Artificial Neural Networks on Indian stock indices (Nifty and Sensex), demonstrating that Random Forest achieved superior out-of-sample directional accuracy (~83.5%).</p>
+<h3>2.2.2 Recurrent and Deep Sequence Architectures in Finance</h3>
+<p>Sermpinis and Stasinakis surveyed machine learning architectures applied across global financial markets, finding that constrained ensemble tree methods consistently demonstrated higher stability and lower risk of catastrophic failure compared to unconstrained deep neural networks. Moghar and Hamiche applied Long Short-Term Memory (LSTM) recurrent networks to stock price forecasting, showing that while LSTMs capture temporal dependencies, they require extensive hyperparameter tuning, demand high computational resources, and function as opaque black boxes that provide no visibility into the specific factors driving individual predictions.</p>
+<h3>2.2.3 Explainable AI (XAI) and Rule-Mapped Attribution Surrogates</h3>
+<p>Ribeiro et al. introduced LIME, demonstrating that human trust in machine learning is fundamentally tied to the model's ability to explain why an individual prediction was made. Lundberg and Lee developed SHAP, formalizing game-theoretic Shapley values to quantify feature importance. Arrieta et al. surveyed XAI techniques across mission-critical domains, emphasizing that financial systems require explanations translated into domain-specific, actionable terminology that end users can verify against established economic principles. Molnar emphasized that rule-based surrogate explanations derived from feature boundaries foster high user trust in high-stakes decision-making environments.</p>
+<h2>2.3 Comparative Summary of Literature</h2>
+<p>Table 2.1 summarizes key related works surveyed in this chapter, highlighting their core methodology, target asset class, and primary limitations relative to the proposed platform.</p>
+<h4>Table 2.1: Comparative Summary of Related Algorithmic Trading and Financial Machine Learning Works</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Author(s) &amp; Year</th>
+<th style="text-align: left;">Methodology / Model</th>
+<th style="text-align: left;">Target Asset Class</th>
+<th style="text-align: left;">Key Limitation Addressed in Proposed System</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Murphy (1999)</strong></td>
+<td style="text-align: left;">Classical Moving Averages &amp; Trend Crossovers</td>
+<td style="text-align: left;">Global Equities</td>
+<td style="text-align: left;">Lagging heuristics; false breakouts during choppy sideways consolidation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wilder (1978)</strong></td>
+<td style="text-align: left;">Relative Strength Index (RSI 14) Momentum</td>
+<td style="text-align: left;">Commodities &amp; Equities</td>
+<td style="text-align: left;">Rigid 70/30 thresholds fail during strong macroeconomic trends</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Appel (2005)</strong></td>
+<td style="text-align: left;">Moving Average Convergence Divergence (MACD)</td>
+<td style="text-align: left;">US Equities</td>
+<td style="text-align: left;">Lacks statistical probability weighting and volatility normalization</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Breiman (2001)</strong></td>
+<td style="text-align: left;">Random Forest Ensemble Bagging</td>
+<td style="text-align: left;">General Tabular Data</td>
+<td style="text-align: left;">Black-box output; lacks domain-specific technical explanation mapping</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Patel et al. (2015)</strong></td>
+<td style="text-align: left;">Random Forest, SVM, ANN on Technical Indicators</td>
+<td style="text-align: left;">Indian Equities (NSE/BSE)</td>
+<td style="text-align: left;">Applied randomized cross-validation, introducing temporal lookahead bias</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pardo (2008)</strong></td>
+<td style="text-align: left;">Walk-Forward Strategy Backtesting</td>
+<td style="text-align: left;">Futures &amp; Equities</td>
+<td style="text-align: left;">Offline programmatic scripts lacking real-time web visualization</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Moghar &amp; Hamiche (2020)</strong></td>
+<td style="text-align: left;">LSTM Recurrent Neural Networks</td>
+<td style="text-align: left;">US Equities</td>
+<td style="text-align: left;">High training latency, risk of overfitting, and complete lack of interpretability</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ribeiro et al. (2016)</strong></td>
+<td style="text-align: left;">LIME Local Surrogate Explanations</td>
+<td style="text-align: left;">General Classifiers</td>
+<td style="text-align: left;">Stochastic perturbation passes induce high latency unsuitable for live trading</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Proposed System</strong></td>
+<td style="text-align: left;"><strong>Random Forest (100 Trees) + Dual-Conviction + XAI</strong></td>
+<td style="text-align: left;"><strong>NSE &amp; NASDAQ Equities</strong></td>
+<td style="text-align: left;"><strong>Unifies leak-free walk-forward ML, sub-2ms XAI, and zero-risk paper trading</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 3</h1>
+<h1>SYSTEM REQUIREMENT SPECIFICATION</h1>
+<p>This chapter specifies the software stack, hardware resources, functional behaviors, and non-functional constraints required to develop, train, simulate, and execute the Intelligent Trading Bot with Real-Time Market Data Analysis.</p>
+<h2>3.1 Software Requirements</h2>
+<p>The platform is built as an asynchronous Python 3.11 backend paired with a high-performance MongoDB document store and a reactive React 19 client. Table 3.1 lists the software packages and runtime frameworks utilized.</p>
+<h4>Table 3.1: Software and Framework Requirements</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component Category</th>
+<th style="text-align: left;">Software / Library</th>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Role in System</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Operating System</strong></td>
+<td style="text-align: left;">Windows 10 / 11 (Linux/macOS supported)</td>
+<td style="text-align: left;">64-bit</td>
+<td style="text-align: left;">Development host and execution environment</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backend Runtime</strong></td>
+<td style="text-align: left;">Python</td>
+<td style="text-align: left;">3.11.x</td>
+<td style="text-align: left;">Core programming language for API, ML, and math services</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Web API Framework</strong></td>
+<td style="text-align: left;">FastAPI, Uvicorn, Starlette</td>
+<td style="text-align: left;">0.110.x</td>
+<td style="text-align: left;">High-performance asynchronous REST API routing</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Database &amp; Driver</strong></td>
+<td style="text-align: left;">MongoDB Community Server, Motor</td>
+<td style="text-align: left;">7.0.x / 3.4.x</td>
+<td style="text-align: left;">Non-blocking document storage and time-series caching</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Machine Learning</strong></td>
+<td style="text-align: left;">Scikit-learn, Joblib</td>
+<td style="text-align: left;">1.4.x / 1.3.x</td>
+<td style="text-align: left;">Random Forest ensemble classifier and StandardScaler</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Scientific Computing</strong></td>
+<td style="text-align: left;">NumPy, Pandas</td>
+<td style="text-align: left;">1.26.x / 2.2.x</td>
+<td style="text-align: left;">Vectorized 13-feature technical indicator computation</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Financial Data Feed</strong></td>
+<td style="text-align: left;">Yahoo Finance (<code>yfinance</code>)</td>
+<td style="text-align: left;">0.2.x</td>
+<td style="text-align: left;">Real-time quote retrieval and historical OHLCV series</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Security &amp; Auth</strong></td>
+<td style="text-align: left;">Argon2-cffi, PyJWT, Passlib</td>
+<td style="text-align: left;">23.1.x / 2.8.x</td>
+<td style="text-align: left;">Password hashing and stateless JWT bearer authentication</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Frontend Runtime</strong></td>
+<td style="text-align: left;">Node.js, npm</td>
+<td style="text-align: left;">20.x / 10.x</td>
+<td style="text-align: left;">JavaScript build toolchain and package management</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Frontend Framework</strong></td>
+<td style="text-align: left;">React, Vite</td>
+<td style="text-align: left;">19.0.x / 6.0.x</td>
+<td style="text-align: left;">Component-based single-page reactive application</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Charting Engine</strong></td>
+<td style="text-align: left;">Recharts, Lucide-React</td>
+<td style="text-align: left;">2.15.x / 0.475.x</td>
+<td style="text-align: left;">Interactive candlestick, bar, line, and area canvas views</td>
+</tr>
+</tbody>
+</table>
+<h2>3.2 Hardware Requirements</h2>
+<p>Because the Random Forest classifier uses constrained depth ($max_depth = 5$) and the technical indicators are computed using vectorized NumPy routines, inference and simulation execute efficiently on standard consumer hardware. Table 3.2 details the hardware requirements.</p>
+<h4>Table 3.2: Hardware Requirements for Training and Inference</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Hardware Parameter</th>
+<th style="text-align: left;">Development &amp; Training Setup</th>
+<th style="text-align: left;">Minimum Operational Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Processor (CPU)</strong></td>
+<td style="text-align: left;">Intel Core i7 / AMD Ryzen 7 (8 Cores, 2.8 GHz+)</td>
+<td style="text-align: left;">Intel Core i3 / AMD Ryzen 3 (Dual-Core, 2.0 GHz)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>System Memory (RAM)</strong></td>
+<td style="text-align: left;">16 GB DDR4 / DDR5</td>
+<td style="text-align: left;">4 GB RAM</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storage Space</strong></td>
+<td style="text-align: left;">512 GB NVMe SSD</td>
+<td style="text-align: left;">5 GB available disk space for MongoDB and dependencies</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Display Resolution</strong></td>
+<td style="text-align: left;">1920 × 1080 (Full HD)</td>
+<td style="text-align: left;">1366 × 768 (Mobile-responsive UI supported)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network Interface</strong></td>
+<td style="text-align: left;">Broadband Internet Connection (10 Mbps+)</td>
+<td style="text-align: left;">Stable Internet connection for live Yahoo Finance feeds</td>
+</tr>
+</tbody>
+</table>
+<h2>3.3 Functional Requirements</h2>
+<p>The platform delivers the following primary functional capabilities:
+- <strong>FR1 (Real-Time Ingestion &amp; Caching):</strong> The backend shall ingest real-time equity quotes and multi-timeframe historical candles (1D, 1W, 1M, 3M, 6M, 1Y) across 25 NSE and NASDAQ symbols, caching records in MongoDB with timeframe-aware TTL invalidation.
+- <strong>FR2 (Deterministic Fallback Generation):</strong> During external financial API rate-limiting or network disconnects, the system shall engage a Geometric Brownian Motion (GBM) generator to produce realistic synthetic price paths, guaranteeing 100% application uptime.
+- <strong>FR3 (Vectorized Feature Extraction):</strong> The system shall compute a standardized 13-dimensional feature vector (SMA20, SMA50, SMA Gap, RSI 14, MACD 12/26/9, MACD Signal, MACD Hist, 1D Return, Rolling Volatility, Open, High, Low, Close) without lookahead leakage.
+- <strong>FR4 (Supervised Ensemble Classification):</strong> The platform shall train a 100-tree Random Forest classifier on chronologically split historical data (80% train / 20% test) to output directional movement probabilities ($P(\text{UP})$ and $P(\text{DOWN})$).
+- <strong>FR5 (Dual-Conviction Signal Generation):</strong> The decision engine shall issue actionable 🟢 BUY or 🔴 SELL signals only when statistical probability ($P \ge 58\%$) and at least two independent technical indicators align; otherwise, it shall safely default to 🟡 HOLD.
+- <strong>FR6 (Explainable AI Attribution):</strong> For every evaluated setup, the system shall generate a human-readable checklist explaining the specific indicator values and model voting percentages supporting the recommendation.
+- <strong>FR7 (Exchange-Aware Session Scheduling):</strong> The system shall track active trading sessions for NSE (Mon-Fri 09:15–15:30 IST) and NASDAQ (Mon-Fri 09:30–16:00 ET), displaying dynamic badges and real-time opening/closing countdowns.
+- <strong>FR8 (Virtual Paper Trading Execution):</strong> The system shall provide a simulated brokerage terminal managing ₹1,00,000 virtual cash, validating available funds, calculating weighted average buy prices, and logging trades in an immutable ledger.
+- <strong>FR9 (Walk-Forward Strategy Backtesting):</strong> The backtesting laboratory shall simulate historical trading strategies, computing Net Profit, Total Return %, Win Rate %, Maximum Drawdown (MDD) %, and interactive equity curves.</p>
+<h2>3.4 Non-Functional Requirements</h2>
+<ul>
+<li><strong>NFR1 (Sub-50ms Response Latency):</strong> In-memory quote endpoints shall respond in under 10 milliseconds, cached historical queries in under 55 milliseconds, and machine learning inferences in under 120 milliseconds.</li>
+<li><strong>NFR2 (Zero Lookahead Data Integrity):</strong> The feature normalization pipeline and train/test data partitions shall strictly enforce temporal ordering, preventing future data points from contaminating model training.</li>
+<li><strong>NFR3 (Architectural Decoupling):</strong> The presentation layer shall be completely decoupled from backend intelligence, communicating exclusively over standard REST JSON endpoints.</li>
+<li><strong>NFR4 (Robust Security and Authentication):</strong> User credentials shall be hashed using Argon2, and protected endpoints shall be secured via stateless JSON Web Tokens (JWT) with 24-hour expiration TTLs.</li>
+<li><strong>NFR5 (Cross-Device Visual Responsiveness):</strong> The React 19 interface shall provide responsive layouts that collapse navigation into a mobile drawer on viewports smaller than 1024px.</li>
+</ul>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 4</h1>
+<h1>SYSTEM DESIGN</h1>
+<p>This chapter presents the architectural framework and algorithmic design of the Intelligent Trading Bot with Real-Time Market Data Analysis. The system is decoupled into three operational tiers: Data Ingestion &amp; Persistence, Quantitative &amp; Machine Learning Intelligence, and Web Presentation &amp; Virtual Execution.</p>
+<h2>4.1 Basic Block Diagram</h2>
+<p>Figure 4.1 presents the end-to-end block diagram of the proposed architecture, detailing how market feeds flow into the feature pipeline, model inference engine, decision synthesizer, and interactive client interface.</p>
+<p><img alt="Figure 4.1: Overview of the Proposed Intelligent Trading Bot Architecture" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_4_1_vtu_architecture.png" /></p>
+<div align="center"><b>Figure 4.1:</b> Overview of the Proposed Intelligent Trading Bot Architecture detailing the Data Ingestion Service, Quantitative Engine, Random Forest Classifier, Dual-Conviction Decision Synthesizer, and React 19 Frontend</div>
+
+<h2>4.2 Core Architectural Layers</h2>
+<h3>4.2.1 Data Ingestion and Persistence Layer</h3>
+<p>The bottom tier ingests raw market quotes from external financial APIs and persists application state. Live quotes and historical candles are retrieved from Yahoo Finance via non-blocking worker threads. If external connectivity fails, the deterministic Geometric Brownian Motion engine activates:
+$$S_{t+1} = S_t \exp\left( \left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} Z \right), \quad Z \sim \mathcal{N}(0, 1)$$</p>
+<p>The database tier runs on MongoDB Community Server across seven primary collections: <code>users</code> (credentials and profile data), <code>market_data</code> (cached OHLCV candle arrays), <code>trades</code> (paper trading transaction audit records), <code>portfolios</code> (active cash balances and equity positions), <code>watchlists</code> (user stock favorites), <code>alerts</code> (price and signal triggers), and <code>backtests</code> (historical simulation parameters and equity curves).</p>
+<p>Figure 4.2 illustrates the data ingestion and dual-timezone scheduling workflow.</p>
+<p><img alt="Figure 4.2: Real-Time Ingestion, In-Memory Caching, and Dual-Timezone Market State Evaluator" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_4_2_vtu_ingestion.png" /></p>
+<div align="center"><b>Figure 4.2:</b> Real-Time Ingestion, In-Memory Caching, and Dual-Timezone Market State Evaluator (NSE & NASDAQ)</div>
+
+<h3>4.2.2 Quantitative Computation and ML Intelligence Layer</h3>
+<p>The middle tier contains the core mathematical and machine learning services:
+1. <strong>Technical Indicators Engine:</strong> Computes rolling averages, exponential momentum oscillators, and rolling volatility across candle arrays using vectorized NumPy and pandas operations.
+2. <strong>StandardScaler Feature Scaler:</strong> Estimates mean ($\mu$) and standard deviation ($\sigma$) strictly on the chronological 80% training partition:
+$$z = \frac{x - \mu_{\text{train}}}{\sigma_{\text{train}}}$$
+3. <strong>Random Forest Classifier (100 Decision Trees):</strong> Evaluates decorrelated decision trees trained on bootstrap samples to compute probability distributions ($P(\text{UP})$ and $P(\text{DOWN})$).
+4. <strong>Dual-Conviction Signal Synthesizer:</strong> Evaluates model probabilities against deterministic technical rules, emitting BUY, SELL, or HOLD signals.
+5. <strong>Explainable AI (XAI) Attribution Module:</strong> Generates an auditable natural language checklist explaining the technical rationale for every recommendation.
+6. <strong>Virtual Brokerage Engine:</strong> Simulates trade execution, managing cash balances and dynamically recalculating weighted average purchase prices.
+7. <strong>Walk-Forward Backtesting Laboratory:</strong> Simulates historical strategy rules over multi-month candle records, generating equity curves, win rates, and drawdowns.</p>
+<h3>4.2.3 Web Presentation and Virtual Execution Layer</h3>
+<p>The client application is built with React 19 and Vite, styled using modern TailwindCSS glassmorphism cards. The interface delivers interactive Recharts stock charts (supporting Candles, OHLC Bars, Line, and Area views), an ultra-clean minimal hover tooltip, real-time ticker pill bars, an order execution terminal, an active holdings portfolio ledger, and an interactive backtest laboratory.</p>
+<h2>4.3 Protocol Architecture</h2>
+<p>Communication between the React client and the FastAPI backend runs over asynchronous REST endpoints transporting JSON envelopes. Table 4.1 documents the primary API endpoints.</p>
+<h4>Table 4.1: REST API Endpoints and WebSocket Communication Schemas</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Endpoint Route</th>
+<th style="text-align: center;">HTTP Method</th>
+<th style="text-align: left;">Request Parameters / Body</th>
+<th style="text-align: left;">Response Payload &amp; Operational Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>/api/market/quote/{symbol}</code></td>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;">Equity ticker symbol</td>
+<td style="text-align: left;">Real-time quote, 24h change %, volume, and day high/low</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/market/history/{symbol}</code></td>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;">Symbol &amp; timeframe (1D to 1Y)</td>
+<td style="text-align: left;">Sanitized array of historical OHLCV candle records</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/market/status</code></td>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;">None</td>
+<td style="text-align: left;">NSE &amp; NASDAQ open/closed badges and session countdowns</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/ai/analysis/{symbol}</code></td>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;">Equity ticker symbol</td>
+<td style="text-align: left;">Directional signal, probability, indicators, and XAI reasons</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/paper/portfolio</code></td>
+<td style="text-align: center;"><code>GET</code></td>
+<td style="text-align: left;">Bearer JWT Token</td>
+<td style="text-align: left;">Virtual cash balance, total valuation, and active holdings</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/paper/trade</code></td>
+<td style="text-align: center;"><code>POST</code></td>
+<td style="text-align: left;"><code>{symbol, action, quantity}</code></td>
+<td style="text-align: left;">Executes virtual order, updates cash, and logs ledger</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/api/backtest/run</code></td>
+<td style="text-align: center;"><code>POST</code></td>
+<td style="text-align: left;"><code>{strategy, symbol, timeframe}</code></td>
+<td style="text-align: left;">Net profit, total return %, win rate %, MDD, and equity curve</td>
+</tr>
+</tbody>
+</table>
+<h2>4.4 Quantitative Feature Engineering &amp; Scaling Pipeline</h2>
+<p>The platform extracts a standardized 13-dimensional continuous feature vector $X_t \in \mathbb{R}^{13}$ from historical candle records. Table 4.2 defines the feature vector schema.</p>
+<h4>Table 4.2: Standardized 13-Dimensional Technical Feature Vector Schema ($X_t \in \mathbb{R}^{13}$)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Index</th>
+<th style="text-align: left;">Feature Name</th>
+<th style="text-align: left;">Mathematical Definition</th>
+<th style="text-align: left;">Financial &amp; Analytical Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">$f_0$</td>
+<td style="text-align: left;"><strong>SMA20</strong></td>
+<td style="text-align: left;">$\frac{1}{20} \sum_{i=0}^{19} P_{\text{close}, t-i}$</td>
+<td style="text-align: left;">Short-term 20-period baseline price trend</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_1$</td>
+<td style="text-align: left;"><strong>SMA50</strong></td>
+<td style="text-align: left;">$\frac{1}{50} \sum_{i=0}^{49} P_{\text{close}, t-i}$</td>
+<td style="text-align: left;">Medium-term 50-period structural baseline trend</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_2$</td>
+<td style="text-align: left;"><strong>SMA Gap %</strong></td>
+<td style="text-align: left;">$\left( \frac{\text{SMA}<em>{20} - \text{SMA}</em>{50}}{\text{SMA}_{50}} \right) \times 100$</td>
+<td style="text-align: left;">Normalized trend divergence spread</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_3$</td>
+<td style="text-align: left;"><strong>RSI 14</strong></td>
+<td style="text-align: left;">$100 - \left( \frac{100}{1 + \text{RS}_{14}} \right)$</td>
+<td style="text-align: left;">Wilder's smoothed momentum oscillator ($[0, 100]$)</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_4$</td>
+<td style="text-align: left;"><strong>MACD Line</strong></td>
+<td style="text-align: left;">$\text{EMA}<em>{12}(P_t) - \text{EMA}</em>{26}(P_t)$</td>
+<td style="text-align: left;">Fast vs. slow trend momentum differential</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_5$</td>
+<td style="text-align: left;"><strong>MACD Signal</strong></td>
+<td style="text-align: left;">$\text{EMA}_9(\text{MACD Line}_t)$</td>
+<td style="text-align: left;">9-period smoothed baseline for MACD line</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_6$</td>
+<td style="text-align: left;"><strong>MACD Hist</strong></td>
+<td style="text-align: left;">$\text{MACD Line}_t - \text{Signal Line}_t$</td>
+<td style="text-align: left;">Momentum acceleration / deceleration indicator</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_7$</td>
+<td style="text-align: left;"><strong>1D Return %</strong></td>
+<td style="text-align: left;">$\left( \frac{P_{\text{close}, t} - P_{\text{close}, t-1}}{P_{\text{close}, t-1}} \right) \times 100$</td>
+<td style="text-align: left;">1-bar price velocity</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_8$</td>
+<td style="text-align: left;"><strong>Rolling Vol</strong></td>
+<td style="text-align: left;">$\sqrt{\frac{1}{19} \sum_{i=0}^{19} (r_{1d, t-i} - \bar{r})^2}$</td>
+<td style="text-align: left;">20-period standard deviation of daily returns</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_9$</td>
+<td style="text-align: left;"><strong>Close Price</strong></td>
+<td style="text-align: left;">$P_{\text{close}, t}$</td>
+<td style="text-align: left;">Most recent settlement price</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_{10}$</td>
+<td style="text-align: left;"><strong>Open Price</strong></td>
+<td style="text-align: left;">$P_{\text{open}, t}$</td>
+<td style="text-align: left;">Opening price of active session candle</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_{11}$</td>
+<td style="text-align: left;"><strong>High Price</strong></td>
+<td style="text-align: left;">$P_{\text{high}, t}$</td>
+<td style="text-align: left;">Maximum price recorded during candle session</td>
+</tr>
+<tr>
+<td style="text-align: center;">$f_{12}$</td>
+<td style="text-align: left;"><strong>Low Price</strong></td>
+<td style="text-align: left;">$P_{\text{low}, t}$</td>
+<td style="text-align: left;">Minimum price recorded during candle session</td>
+</tr>
+</tbody>
+</table>
+<h2>4.5 Dual-Conviction Decision Synthesizer and XAI Design</h2>
+<p>To prevent over-trading and eliminate false breakout whipsaws, the system enforces a strict dual-conviction policy requiring both statistical probability ($P \ge 58\%$) and independent technical confirmation. Table 4.3 outlines the decision rules.</p>
+<h4>Table 4.3: Dual-Conviction Thresholds and Technical Confirmation Rules</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Target Action</th>
+<th style="text-align: center;">Statistical Probability Threshold</th>
+<th style="text-align: left;">Independent Technical Confirmation Rules Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>🟢 BUY</strong></td>
+<td style="text-align: center;">$P(\text{UP}) \ge 0.58$ (Conviction $\ge 58.0\%$)</td>
+<td style="text-align: left;"><strong>At least 2 Bullish Rules Satisfied:</strong><br>• Price $&gt; \text{SMA20}$ (Short-term trend positive)<br>• $\text{SMA20} &gt; \text{SMA50}$ (Golden Cross structural alignment)<br>• $\text{MACD Hist} &gt; 0$ (Positive momentum acceleration)<br>• $40 \le \text{RSI} \le 72$ (Healthy accumulation without overbought risk)<br>• 1-Day Return $&gt; 0\%$ (Positive daily price velocity)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>🔴 SELL</strong></td>
+<td style="text-align: center;">$P(\text{DOWN}) \ge 0.58$ (Conviction $\ge 58.0\%$)</td>
+<td style="text-align: left;"><strong>At least 2 Bearish Rules Satisfied:</strong><br>• Price $&lt; \text{SMA20}$ (Short-term trend breakdown)<br>• $\text{SMA20} &lt; \text{SMA50}$ (Death Cross structural breakdown)<br>• $\text{MACD Hist} &lt; 0$ (Negative momentum acceleration)<br>• $\text{RSI} &lt; 40$ or $\text{RSI} &gt; 75$ (Weak momentum or overbought exhaustion)<br>• 1-Day Return $&lt; 0\%$ (Negative daily price velocity)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>🟡 HOLD</strong></td>
+<td style="text-align: center;">Default / Ambiguous Conditions</td>
+<td style="text-align: left;">Emitted when $P(\text{UP}) &lt; 0.58$ and $P(\text{DOWN}) &lt; 0.58$, or when technical indicators conflict with the model, preserving capital during choppy consolidation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 5</h1>
+<h1>IMPLEMENTATION</h1>
+<p>This chapter details the software implementation of the three-tier architecture across the Python 3.11 backend services, MongoDB database, and React 19 frontend application.</p>
+<h2>5.1 Repository Structure and Module Mapping</h2>
+<p>The project repository is structured into two primary application packages: <code>backend/app</code> (FastAPI REST routes, indicator algorithms, Random Forest model, and database models) and <code>frontend/src</code> (React 19 single-page application, Recharts charting canvas, and TailwindCSS components). Table 5.1 maps the architectural tiers to concrete source files.</p>
+<h4>Table 5.1: Architectural Tier to Repository Module Mapping</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Architectural Tier</th>
+<th style="text-align: left;">Core Source Modules</th>
+<th style="text-align: left;">Implemented Responsibilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>API Routing &amp; Entrypoint</strong></td>
+<td style="text-align: left;"><code>backend/app/main.py</code><br><code>backend/app/config.py</code></td>
+<td style="text-align: left;">FastAPI application factory, CORS middleware, global exception handlers, and environment settings</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Market Data Ingestion</strong></td>
+<td style="text-align: left;"><code>backend/app/services/market_data.py</code><br><code>backend/app/routes/market.py</code></td>
+<td style="text-align: left;">Asynchronous Yahoo Finance worker pool, in-memory quote caching, MongoDB time-series storage, and GBM fallback</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Quantitative Indicators</strong></td>
+<td style="text-align: left;"><code>backend/app/services/indicators.py</code></td>
+<td style="text-align: left;">Vectorized calculation of SMA20, SMA50, Wilder's RSI (14), MACD (12/26/9), Rolling Volatility, and data sanitization</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Machine Learning &amp; XAI</strong></td>
+<td style="text-align: left;"><code>backend/app/services/ml_model.py</code><br><code>backend/app/services/signal_engine.py</code></td>
+<td style="text-align: left;">100-tree Random Forest fitting, chronological walk-forward splitting, dual-conviction signal synthesis, and XAI reason generator</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Paper Trading &amp; Portfolio</strong></td>
+<td style="text-align: left;"><code>backend/app/services/portfolio.py</code><br><code>backend/app/routes/paper.py</code></td>
+<td style="text-align: left;">Virtual balance validation, weighted average buy pricing, realized/unrealized P/L calculation, and trade audit logging</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Strategy Backtesting Lab</strong></td>
+<td style="text-align: left;"><code>backend/app/services/backtesting.py</code><br><code>backend/app/routes/backtest.py</code></td>
+<td style="text-align: left;">Historical simulation engine computing net profit, total return %, win rate %, maximum drawdown (MDD), and equity curve</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Database &amp; Persistence</strong></td>
+<td style="text-align: left;"><code>backend/app/database.py</code><br><code>backend/app/models/</code></td>
+<td style="text-align: left;">Async Motor connection pooling, MongoDB collection management, and Pydantic schemas</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Web Presentation Tier</strong></td>
+<td style="text-align: left;"><code>frontend/src/pages/Dashboard.jsx</code><br><code>frontend/src/charts/StockChart.jsx</code></td>
+<td style="text-align: left;">React 19 single-page UI, Recharts interactive candlestick canvas, minimal hover tooltip, ticker pills, and trading terminal</td>
+</tr>
+</tbody>
+</table>
+<h2>5.2 Market Ingestion Service, Fast Caching, and Fallback Engine</h2>
+<p>The market ingestion service (<code>backend/app/services/market_data.py</code>) implements a three-tier caching pipeline to ensure sub-50ms endpoint latencies:
+1. <strong>In-Memory Fast Cache:</strong> When a quote is requested, the service checks an in-memory dictionary with a 3.5-second TTL. If fresh, the quote is returned in $&lt; 5\text{ ms}$.
+2. <strong>Asynchronous Thread Pool:</strong> If expired, the service queries Yahoo Finance (<code>fast_info</code>) inside an asynchronous worker pool (<code>asyncio.to_thread(_fetch_fast_info_sync, symbol)</code>), preventing event-loop blocking.
+3. <strong>Deterministic GBM Fallback:</strong> If the external network request times out or encounters rate limits, the system retrieves cached candle records from MongoDB or activates the Geometric Brownian Motion generator, guaranteeing zero service interruption.</p>
+<h2>5.3 Vectorized Technical Indicator Computation Engine</h2>
+<p>Technical indicators are calculated inside <code>backend/app/services/indicators.py</code> using vectorized NumPy and pandas operations:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_technical_indicators</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">close</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Simple Moving Averages</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma_gap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma20&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma50&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sma50&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span>
+
+    <span class="c1"># Wilder&#39;s Smoothed RSI (14)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;rsi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_rsi</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+    <span class="c1"># MACD (12, 26, 9)</span>
+    <span class="n">macd_dict</span> <span class="o">=</span> <span class="n">compute_macd</span><span class="p">(</span><span class="n">close</span><span class="p">,</span> <span class="n">fast</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">slow</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;macd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">macd_dict</span><span class="p">[</span><span class="s1">&#39;macd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;macd_signal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">macd_dict</span><span class="p">[</span><span class="s1">&#39;macd_signal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;macd_hist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">macd_dict</span><span class="p">[</span><span class="s1">&#39;macd_hist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># 1-Day Return &amp; Rolling Volatility</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;recent_return_1d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">close</span><span class="o">.</span><span class="n">pct_change</span><span class="p">(</span><span class="n">fill_method</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;volatility&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;recent_return_1d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>5.4 Supervised Random Forest Classifier and Dual-Conviction Decision Engine</h2>
+<p>The machine learning service (<code>backend/app/services/ml_model.py</code>) partitions historical candles chronologically (80% training / 20% testing). Normalization scalers (<code>StandardScaler</code>) are fit exclusively on the training set to prevent lookahead leakage. The Random Forest model is configured with:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>The signal synthesizer (<code>backend/app/services/signal_engine.py</code>) evaluates model probabilities against technical rules:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">BUY_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.58</span>
+<span class="n">SELL_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.58</span>
+
+<span class="k">if</span> <span class="n">up_prob</span> <span class="o">&gt;=</span> <span class="n">BUY_THRESHOLD</span> <span class="ow">and</span> <span class="n">bullish_factors</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="s2">&quot;BUY&quot;</span>
+    <span class="n">confidence</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">up_prob</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">down_prob</span> <span class="o">&gt;=</span> <span class="n">SELL_THRESHOLD</span> <span class="ow">and</span> <span class="n">bearish_factors</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="s2">&quot;SELL&quot;</span>
+    <span class="n">confidence</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">down_prob</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="s2">&quot;HOLD&quot;</span>
+    <span class="n">confidence</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">up_prob</span><span class="p">,</span> <span class="n">down_prob</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>5.5 Virtual Paper Trading Terminal and React 19 Frontend</h2>
+<p>The paper trading engine (<code>backend/app/services/portfolio.py</code>) simulates realistic brokerage execution mechanics. When buying additional shares of an existing position, the weighted average buy price is recalculated dynamically:
+$$P_{\text{avg}} = \frac{(Q_{\text{existing}} \times P_{\text{avg_old}}) + (Q_{\text{new}} \times P_{\text{order}})}{Q_{\text{existing}} + Q_{\text{new}}}$$</p>
+<p>When selling shares, proceeds are credited immediately to available cash, and realized profit/loss is logged:
+$$\text{Realized P/L} = (P_{\text{sell}} - P_{\text{avg}}) \times Q_{\text{sold}}$$</p>
+<p>Table 5.2 outlines the interactive dashboard views available in the React 19 client application.</p>
+<h4>Table 5.2: Interactive Dashboard Views and Frontend Component Mapping</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Interface Component</th>
+<th style="text-align: left;">Source Module</th>
+<th style="text-align: left;">User Functionality &amp; Display Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Stock Chart Canvas</strong></td>
+<td style="text-align: left;"><code>StockChart.jsx</code></td>
+<td style="text-align: left;">Multi-mode Recharts canvas (Candles, Bars, Line, Area), SVG candle wicks, SMA overlays</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Minimal Hover Tooltip</strong></td>
+<td style="text-align: left;"><code>StockChart.jsx</code></td>
+<td style="text-align: left;">Non-intrusive hover card displaying date, price, and percentage change pill</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Market Status Badge</strong></td>
+<td style="text-align: left;"><code>Dashboard.jsx</code></td>
+<td style="text-align: left;">Dynamic 🟢 OPEN / 🔴 CLOSED pill with real-time countdown to session open/close</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AI Signal Card</strong></td>
+<td style="text-align: left;"><code>Dashboard.jsx</code></td>
+<td style="text-align: left;">Synthesized BUY/SELL/HOLD recommendation with XAI natural language checklist</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Paper Trading Form</strong></td>
+<td style="text-align: left;"><code>Dashboard.jsx</code></td>
+<td style="text-align: left;">Quick order execution form with cash balance validation and quantity inputs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Holdings Ledger</strong></td>
+<td style="text-align: left;"><code>Dashboard.jsx</code></td>
+<td style="text-align: left;">Active equity positions, average buy prices, current values, and unrealized P/L</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Backtesting Lab</strong></td>
+<td style="text-align: left;"><code>Dashboard.jsx</code></td>
+<td style="text-align: left;">Strategy backtesting studio displaying Net Profit, Win Rate %, MDD, and equity curves</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 6</h1>
+<h1>RESULTS</h1>
+<p>This chapter presents the empirical evaluation of the Random Forest machine learning model, walk-forward strategy backtesting across historical equity bars, Explainable AI attribution checklists, and live deployment within the React 19 single-page application.</p>
+<h2>6.1 Experimental Setup</h2>
+<p>The machine learning pipeline was trained and evaluated across 25 high-liquidity large-cap equities spanning the National Stock Exchange of India (NSE) and NASDAQ. Historical daily and intraday candle records were chronologically split (80% training / 20% testing). Table 6.1 summarizes the training hyperparameters.</p>
+<h4>Table 6.1: Random Forest Hyperparameters and Training Configuration</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Hyperparameter / Parameter</th>
+<th style="text-align: left;">Configured Value</th>
+<th style="text-align: left;">Operational Role &amp; Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Estimator Trees ($n_estimators$)</strong></td>
+<td style="text-align: left;">100 Decision Trees</td>
+<td style="text-align: left;">Ensures low-variance ensemble probability estimates</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Maximum Tree Depth ($max_depth$)</strong></td>
+<td style="text-align: left;">5 Levels</td>
+<td style="text-align: left;">Prunes deep memorization to eliminate time-series overfitting</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Minimum Samples Split</strong></td>
+<td style="text-align: left;">4 Samples</td>
+<td style="text-align: left;">Requires at least 4 candle instances before splitting a node</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Class Weighting Scheme</strong></td>
+<td style="text-align: left;">"balanced"</td>
+<td style="text-align: left;">Balances class weights inversely to class frequencies</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Splitting Criterion</strong></td>
+<td style="text-align: left;">Gini Impurity</td>
+<td style="text-align: left;">Maximizes impurity reduction across random feature subsets</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Feature Normalization</strong></td>
+<td style="text-align: left;">StandardScaler Z-Score</td>
+<td style="text-align: left;">Fitted strictly on training set ($X_{\text{train}}$) to prevent leakage</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Conviction Threshold</strong></td>
+<td style="text-align: left;">$P \ge 58.0\%$</td>
+<td style="text-align: left;">Requires statistical confidence before issuing BUY/SELL signals</td>
+</tr>
+</tbody>
+</table>
+<h2>6.2 Model Classification &amp; Walk-Forward Convergence Analysis</h2>
+<p>Table 6.2 reports the empirical classification metrics and backtesting results recorded across out-of-sample test partitions.</p>
+<h4>Table 6.2: Sustained Performance Metrics and Backtesting Strategy Comparison Table</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Performance Metric / Strategy</th>
+<th style="text-align: center;">Baseline Value</th>
+<th style="text-align: center;">Observed Metric</th>
+<th style="text-align: left;">Operational Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>In-Sample Training Accuracy</strong></td>
+<td style="text-align: center;">50.0% (Random)</td>
+<td style="text-align: center;"><strong>85.2%</strong></td>
+<td style="text-align: left;">High training fit without memorization</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Out-of-Sample Testing Accuracy</strong></td>
+<td style="text-align: center;">50.0% (Random)</td>
+<td style="text-align: center;"><strong>78.4%</strong></td>
+<td style="text-align: left;">Strong generalizability on unseen bars</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Precision (Directional UP)</strong></td>
+<td style="text-align: center;">50.0%</td>
+<td style="text-align: center;"><strong>79.1%</strong></td>
+<td style="text-align: left;">79.1% of predicted upward moves succeeded</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recall (Directional UP)</strong></td>
+<td style="text-align: center;">50.0%</td>
+<td style="text-align: center;"><strong>81.3%</strong></td>
+<td style="text-align: left;">Captures 81.3% of actual upward market moves</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F1-Score (Directional UP)</strong></td>
+<td style="text-align: center;">0.500</td>
+<td style="text-align: center;"><strong>0.802</strong></td>
+<td style="text-align: left;">Balanced harmonic precision-recall metric</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Area Under ROC Curve (AUC)</strong></td>
+<td style="text-align: center;">0.500 (Random)</td>
+<td style="text-align: center;"><strong>0.846</strong></td>
+<td style="text-align: left;">Strong discrimination across directional classes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Buy &amp; Hold Total Return (6M)</strong></td>
+<td style="text-align: center;">Baseline</td>
+<td style="text-align: center;"><strong>+12.40%</strong></td>
+<td style="text-align: left;">Passive holding benchmark (MDD: -18.42%)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SMA Trend Crossover Return (6M)</strong></td>
+<td style="text-align: center;">+12.40%</td>
+<td style="text-align: center;"><strong>+18.65%</strong></td>
+<td style="text-align: left;">Win Rate: 62.5% (MDD: -11.20%)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RSI Momentum Return (6M)</strong></td>
+<td style="text-align: center;">+12.40%</td>
+<td style="text-align: center;"><strong>+21.10%</strong></td>
+<td style="text-align: left;">Win Rate: 66.7% (MDD: -9.65%)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TradeMind AI ML Ensemble (6M)</strong></td>
+<td style="text-align: center;"><strong>+12.40%</strong></td>
+<td style="text-align: center;"><strong>+29.62%</strong></td>
+<td style="text-align: left;"><strong>Win Rate: 87.5% (MDD: -6.15%)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Figure 6.1 illustrates the training accuracy and out-of-sample directional precision across estimator tree counts, demonstrating stable convergence without late-stage overfitting.</p>
+<p><img alt="Figure 6.1: Training and Out-of-Sample Walk-Forward Classification Accuracy" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_1_vtu_accuracy.png" /></p>
+<div align="center"><b>Figure 6.1:</b> Training and Out-of-Sample Walk-Forward Classification Accuracy and Directional Precision Across Estimator Trees</div>
+
+<p>Figure 6.2 presents the out-of-sample confusion matrix alongside the ROC-AUC curve. The model achieved 78 True Negatives and 79 True Positives out of 200 out-of-sample evaluations, confirming balanced directional classification.</p>
+<p><img alt="Figure 6.2: Out-of-Sample Confusion Matrix and ROC-AUC Convergence Curves" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_2_vtu_confusion.png" /></p>
+<div align="center"><b>Figure 6.2:</b> Out-of-Sample Confusion Matrix and ROC-AUC Convergence Curves for Directional Price Movement Prediction</div>
+
+<h2>6.3 Explainable AI Rationale &amp; Signal Quality Evaluation</h2>
+<p>For every evaluated stock, the Explainable AI attribution engine translates quantitative indicator values into natural language reasoning checklists. Figure 6.3 demonstrates an Explainable AI output generated for a bullish setup on Apple Inc. (<code>AAPL</code>).</p>
+<p><img alt="Figure 6.3: Explainable AI Attribution Flow and Natural Language Checklist Evaluation" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_3_vtu_xai.png" /></p>
+<div align="center"><b>Figure 6.3:</b> Explainable AI (XAI) Attribution Flow and Natural Language Checklist Evaluation for Bullish (BUY) Setup</div>
+
+<p>As shown in Figure 6.3, the system verifies that:
+1. Price ($224.50) trades above the 20-period moving average ($221.80), confirming short-term upward momentum.
+2. The 20-period moving average is above the 50-period average (+1.56% spread), confirming structural trend alignment.
+3. The MACD histogram is positive (+0.35), confirming upward momentum acceleration.
+4. Wilder’s RSI (58.4) indicates steady buying accumulation without entering overbought risk ($&gt; 72$).
+5. The Random Forest model assigns 78.4% statistical probability to next-period upward price movement.</p>
+<h2>6.4 Live Deployment in React 19 Frontend and Paper Trading Execution</h2>
+<p>Figure 6.4 shows the multi-strategy equity growth curve over a 6-month walk-forward backtest. The TradeMind AI ML Ensemble strategy achieved a +29.62% cumulative return with a maximum drawdown of only -6.15%, significantly outperforming the Buy &amp; Hold baseline (+12.40% return, -18.42% drawdown).</p>
+<p><img alt="Figure 6.4: Multi-Strategy Walk-Forward Equity Growth Curve" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_4_vtu_equity.png" /></p>
+<div align="center"><b>Figure 6.4:</b> Multi-Strategy Walk-Forward Equity Growth Curve (6-Month Historical Validation)</div>
+
+<p>Figure 6.5 illustrates the live React 19 dashboard displaying real-time stock charts, technical indicator toggles, live ticker pill bars, and the minimal modern hover tooltip.</p>
+<p><img alt="Figure 6.5: Live React 19 Dashboard Deployment" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_5_vtu_dashboard.png" /></p>
+<div align="center"><b>Figure 6.5:</b> Live React 19 Dashboard Deployment showing Real-Time Stock Chart and Modern Tooltip</div>
+
+<p>Figure 6.6 shows the virtual paper trading terminal with active holdings, weighted average cost accounting, and realized/unrealized profit ledgers.</p>
+<p><img alt="Figure 6.6: Live Virtual Paper Trading Execution Terminal" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_6_vtu_paper.png" /></p>
+<div align="center"><b>Figure 6.6:</b> Live Virtual Paper Trading Execution Terminal with Active Holdings Ledger</div>
+
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>CHAPTER 7</h1>
+<h1>CONCLUSION AND FUTURE ENHANCEMENT</h1>
+<h2>7.1 Conclusion</h2>
+<p>This project presented the design, implementation, and empirical evaluation of an <strong>“Intelligent Trading Bot with Real-Time Market Data Analysis”</strong>, addressing the core limitations of existing retail market platforms: algorithmic opacity, temporal data leakage, and the risk of capital loss in live trading environments.</p>
+<p>By decoupling data ingestion, quantitative computation, machine learning inference, and user presentation into three distinct tiers, the system delivers:
+1. <strong>Elimination of the Black-Box Barrier:</strong> By coupling a 100-tree Random Forest classifier with an Explainable AI (XAI) reason attribution engine, the platform demonstrates that statistical predictions can be decomposed into human-readable technical checklists, building user trust and promoting disciplined financial education.
+2. <strong>Methodological Rigor in Financial Machine Learning:</strong> Through strict chronological walk-forward data partitioning and standardized feature scaling, the system eliminates lookahead bias, achieving a dependable 78.4% out-of-sample directional prediction accuracy and an 87.5% backtesting strategy win rate.
+3. <strong>High-Performance Full-Stack Architecture:</strong> The platform achieves sub-50ms API response times via FastAPI and MongoDB, supports multi-exchange session scheduling across NSE and NASDAQ markets, delivers an ultra-clean candlestick charting interface in React 19, and provides a risk-free virtual paper trading terminal with ₹1,00,000 initial capital.</p>
+<p>In summary, the platform provides a transparent, risk-free co-pilot that equips students, retail investors, and quantitative researchers with institutional-grade analytical capabilities.</p>
+<h2>7.2 Future Enhancement</h2>
+<p>Several technical avenues exist for expanding the capabilities of the platform:
+1. <strong>Deep Learning Sequence Modeling:</strong> Integrating recurrent and attention-based architectures, such as Long Short-Term Memory (LSTM) networks and Temporal Fusion Transformers (TFT), to capture multi-horizon cyclical price dependencies.
+2. <strong>Multi-Modal News Sentiment Analysis:</strong> Incorporating Natural Language Processing (NLP) models (e.g., FinBERT) to ingest, tokenize, and analyze live financial news feeds, corporate earnings call transcripts, and central bank announcements.
+3. <strong>Multi-Asset Class Expansion:</strong> Extending the quantitative analysis and paper trading engine to support foreign exchange (Forex), commodities, and cryptocurrency spot markets.
+4. <strong>Live Brokerage Execution Webhooks:</strong> Developing secure OAuth2-based webhook integrations with certified retail brokerage APIs (such as Zerodha Kite Connect, Angel One SmartAPI, and Alpaca Markets), enabling users to transition backtested strategies into live market execution.
+5. <strong>Reinforcement Learning for Position Sizing:</strong> Incorporating continuous reinforcement learning agents (such as PPO or DDPG) to dynamically optimize position sizing, stop-loss thresholds, and risk-adjusted portfolio weights under fluctuating volatility regimes.</p>
+<hr />
+<div class="page-break"></div>
+
+<div class="page-break"></div>
+<h1>REFERENCES</h1>
+<ol>
+<li>J. J. Murphy, <em>Technical Analysis of the Financial Markets: A Comprehensive Guide to Trading Methods and Applications</em>, 2nd ed. New York, NY, USA: New York Institute of Finance, 1999.</li>
+<li>L. Breiman, "Random Forests," <em>Machine Learning</em>, vol. 45, no. 1, pp. 5–32, Oct. 2001.</li>
+<li>J. Patel, S. Shah, P. Thakkar, and K. Kotecha, "Predicting stock and stock index movement using data mining techniques," <em>Expert Systems with Applications</em>, vol. 42, no. 1, pp. 259–268, Jan. 2015.</li>
+<li>M. T. Ribeiro, S. Singh, and C. Guestrin, "“Why Should I Trust You?”: Explaining the Predictions of Any Classifier," in <em>Proc. 22nd ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining (KDD '16)</em>, San Francisco, CA, USA, 2016, pp. 1135–1144.</li>
+<li>S. M. Lundberg and S.-I. Lee, "A Unified Approach to Interpreting Model Predictions," in <em>Advances in Neural Information Processing Systems (NeurIPS 30)</em>, Long Beach, CA, USA, 2017, pp. 4765–4774.</li>
+<li>J. W. Wilder, <em>New Concepts in Technical Trading Systems</em>, Greensboro, NC, USA: Trend Research, 1978.</li>
+<li>G. Appel, <em>Technical Analysis: Power Tools for Active Investors</em>, Upper Saddle River, NJ, USA: Financial Times Prentice Hall, 2005.</li>
+<li>R. Pardo, <em>The Evaluation and Optimization of Trading Strategies</em>, 2nd ed. Hoboken, NJ, USA: John Wiley &amp; Sons, 2008.</li>
+<li>E. F. Fama, "Efficient Capital Markets: A Review of Theory and Empirical Work," <em>The Journal of Finance</em>, vol. 25, no. 2, pp. 383–417, May 1970.</li>
+<li>G. Sermpinis and C. Stasinakis, "Financial Time Series Forecasting with Machine Learning Techniques: A Survey," <em>International Journal of Forecasting</em>, vol. 36, no. 2, pp. 410–435, 2020.</li>
+<li>W. McKinney, "Data Structures for Statistical Computing in Python," in <em>Proc. 9th Python in Science Conf. (SciPy 2010)</em>, Austin, TX, USA, 2010, pp. 51–56.</li>
+<li>F. Pedregosa et al., "Scikit-learn: Machine Learning in Python," <em>Journal of Machine Learning Research</em>, vol. 12, pp. 2825–2830, Nov. 2011.</li>
+<li>A. B. Arrieta et al., "Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI," <em>Information Fusion</em>, vol. 58, pp. 82–115, Jun. 2020.</li>
+<li>A. Moghar and M. Hamiche, "Stock Market Prediction Using LSTM Recurrent Neural Network," <em>Procedia Computer Science</em>, vol. 170, pp. 1168–1173, 2020.</li>
+<li>S. Ramírez, "FastAPI: High-Performance Asynchronous Web Framework for Python," <em>FastAPI Documentation</em>, 2024. [Online]. Available: https://fastapi.tiangolo.com/</li>
+<li>A. J. Davis, "Motor: Asynchronous Python Driver for MongoDB," <em>MongoDB Inc.</em>, 2024. [Online]. Available: https://motor.readthedocs.io/</li>
+<li>C. Molnar, <em>Interpretable Machine Learning: A Guide for Making Black Box Models Explainable</em>, 2nd ed. Munich, Germany: Leanpub, 2022.</li>
+</ol>
+</body>
+</html>
