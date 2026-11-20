@@ -349,6 +349,10 @@ A supervised **Random Forest Classifier (100 Decision Trees)** is trained across
 # CHAPTER 1: INTRODUCTION
 
 ### 1.1 Overview
+
+![Figure 1.1: Overview of Intelligent Trading Bot with Real-Time Market Data Analysis](figures/fig_1_1_system_overview.png)
+<div align="center"><b>Figure 1.1:</b> Overview of Intelligent Trading Bot with Real-Time Market Data Analysis</div>
+
 Financial equity markets represent one of the most critical sectors of the modern global economy, enabling capital mobilization, corporate investment, and wealth generation. Over the last three decades, digital transformation has fundamentally reshaped equity trading from physical trading floors to high-frequency, distributed electronic communication networks. Today, algorithmic trading models drive over 70% of total trading volume across developed equity exchanges and an increasing proportion in emerging markets like India.
 
 However, the rapid computational advancement of financial markets has not translated into proportional accessibility for everyday retail market participants, university students, and independent quantitative researchers. Retail market participants encounter severe cognitive barriers, high analytical complexity, and immediate capital risk when interacting with financial markets. Most contemporary market tools fall into two extreme paradigms:
@@ -758,16 +762,8 @@ The platform extracts a standardized 13-dimensional continuous feature vector $X
 The overall workflow follows a sequential, event-driven pipeline:
 $$\text{Stock Selection} \rightarrow \text{Data Ingestion \& Caching} \rightarrow \text{Feature Computation} \rightarrow \text{Chronological Split} \rightarrow \text{Random Forest Fitting} \rightarrow \text{Probability Estimation} \rightarrow \text{Dual-Conviction Rule Evaluation} \rightarrow \text{XAI Reason Mapping} \rightarrow \text{UI Rendering} \rightarrow \text{Paper Trade Execution / Backtest}$$
 
-```mermaid
-flowchart LR
-    A["Raw Financial Feed<br>(NSE / NASDAQ)"] --> B["13-Feature Engineering<br>(SMA, RSI, MACD, Vol)"]
-    B --> C["Chronological Split<br>(80% Train / 20% Test)"]
-    C --> D["Random Forest Model<br>(100 Decision Trees)"]
-    D --> E["Dual-Conviction Engine<br>(58% Thresh + Technicals)"]
-    E --> F["Explainable AI (XAI)<br>Reason Generator"]
-    F --> G["React 19 Fintech UI<br>(Dashboard & Paper Trading)"]
-```
-<div align="center"><b>Figure 3.1: End-to-End System Processing and Signal Generation Pipeline</b></div>
+![Figure 3.1: End-to-End System Processing and Signal Generation Pipeline](figures/fig_3_1_workflow_pipeline.png)
+<div align="center"><b>Figure 3.1:</b> End-to-End System Processing and Signal Generation Pipeline</div>
 
 ---
 
@@ -826,6 +822,10 @@ The paper trading engine (`backend/app/services/portfolio.py`) simulates realist
 ---
 
 ### 3.12 Dual-Timezone Exchange Operating Logic (NSE & NASDAQ)
+
+![Figure 5.2: Exchange-Aware Dual Timezone Clock Workflow (NSE & NASDAQ)](figures/fig_5_2_dual_timezone.png)
+<div align="center"><b>Figure 5.2:</b> Exchange-Aware Dual Timezone Clock Workflow (NSE & NASDAQ)</div>
+
 The platform dynamically tracks the operating sessions of two major financial exchanges:
 - **National Stock Exchange of India (NSE)**: Operates Monday through Friday, **9:15 AM to 3:30 PM Indian Standard Time (`Asia/Kolkata`)**.
 - **NASDAQ (US Equities)**: Operates Monday through Friday, **9:30 AM to 4:00 PM Eastern Time (`America/New_York`)**.
@@ -867,20 +867,12 @@ The Intelligent Trading Bot is engineered around a hybrid quantitative architect
 ### 4.2 Random Forest Classifier Architecture (100 Decision Trees)
 The Random Forest algorithm is an ensemble bagging method that builds $B = 100$ independent decision trees during training. Each tree is trained on a bootstrap sample drawn with replacement from the historical feature matrix $X \in \mathbb{R}^{N \times 13}$.
 
-```mermaid
-flowchart TD
-    A["13 Scaled Technical Features ($X_t$)"] --> B["Bootstrap Sampling (Bagging)"]
-    B --> T1["Decision Tree #1"]
-    B --> T2["Decision Tree #2"]
-    B --> T3["Decision Tree #..."]
-    B --> T100["Decision Tree #100"]
-    T1 --> V["Ensemble Majority Voting & Averaging"]
-    T2 --> V
-    T3 --> V
-    T100 --> V
-    V --> P1["$P(UP) = \frac{1}{100} \sum I(T_b = 1)$"]
-    V --> P2["$P(DOWN) = 1 - P(UP)$"]
-```
+
+
+![Figure 4.1: Random Forest 100-Tree Ensemble Voting & Gini Impurity Structure](figures/fig_4_1_random_forest.png)
+<div align="center"><b>Figure 4.1:</b> Random Forest 100-Tree Ensemble Voting & Gini Impurity Structure</div>
+
+
 <div align="center"><b>Figure 4.1: Random Forest 100-Tree Ensemble Voting & Gini Impurity Structure</b></div>
 
 #### 4.2.1 Splitting Criterion: Gini Impurity
@@ -932,14 +924,8 @@ TradeMind AI implements two complementary interpretability mechanisms:
    Ranked feature importances are returned to the user interface to show which indicators exerted the greatest influence on the model.
 2. **Local Natural Language Attribution**: Evaluates the specific feature values of the current live candle against technical thresholds to produce human-readable explanation bullet points (e.g., *"Price is above SMA20"*, *"MACD histogram is positive confirming momentum"*, *"RSI indicates steady buying without overbought risk"*).
 
-```mermaid
-flowchart LR
-    A["Raw Feature Values<br>(Price, SMA, RSI, MACD)"] --> B["Rule Mapping Engine"]
-    C["Random Forest<br>Class Probabilities"] --> B
-    D["Gini Feature<br>Importances"] --> B
-    B --> E["Explainable AI Checklist<br>• Price > SMA20 (Bullish trend)<br>• MACD Hist +0.42 (Acceleration)<br>• Model Conviction: 78.4% UP"]
-```
-<div align="center"><b>Figure 4.2: Explainable AI (XAI) Feature Attribution and Reason Mapping Flow</b></div>
+![Figure 4.2: Explainable AI (XAI) Feature Attribution and Reason Mapping Flow](figures/fig_4_2_xai_attribution.png)
+<div align="center"><b>Figure 4.2:</b> Explainable AI (XAI) Feature Attribution and Reason Mapping Flow</div>
 
 ---
 
@@ -965,33 +951,8 @@ Table 4.1 summarizes the operational characteristics of the machine learning and
 ### 5.1 System Architecture (Major Layers)
 The platform follows a layered architectural pattern that decouples data ingestion, quantitative computation, machine learning inference, and user presentation:
 
-```mermaid
-flowchart TD
-    subgraph L1 ["1. Data Ingestion & Persistence Layer"]
-        YF["Yahoo Finance API"] --> INGEST["Market Data Ingestion Service"]
-        GBM["Geometric Brownian Motion Fallback"] --> INGEST
-        INGEST --> MONGO[("MongoDB Database: trademind_ai")]
-    end
-
-    subgraph L2 ["2. Service & Quantitative Layer"]
-        MONGO <--> CACHE["Asynchronous Cache & TTL Validator"]
-        CACHE --> FEAT["13-Feature Engineering Pipeline"]
-        FEAT --> ML["Random Forest Model (100 Trees)"]
-        FEAT & ML --> SIG["Dual-Conviction Signal Engine"]
-        SIG --> XAI["Explainable AI (XAI) Reason Generator"]
-        SIG & MONGO <--> PAPER["Paper Trading Portfolio Engine"]
-        FEAT & SIG <--> BACKTEST["Walk-Forward Backtesting Lab"]
-    end
-
-    subgraph L3 ["3. API Gateway & Presentation Layer"]
-        API["FastAPI REST Routes (/api/*)"]
-        SIG & XAI & PAPER & BACKTEST --> API
-        API <--> DASH["React 19 Fintech Dashboard"]
-        API <--> TERM["Paper Trading Execution Terminal"]
-        API <--> LAB["Backtesting Simulation Studio"]
-    end
-```
-<div align="center"><b>Figure 5.1: Layered Multi-Tier System Architecture (Data, App, AI, UI)</b></div>
+![Figure 5.1: Layered Multi-Tier System Architecture (Data, App, AI, UI)](figures/fig_5_1_system_architecture.png)
+<div align="center"><b>Figure 5.1:</b> Layered Multi-Tier System Architecture (Data, App, AI, UI)</div>
 
 ---
 
@@ -1002,6 +963,9 @@ The user interface is built as a single-page application in React 19 with Vite, 
   - 🟢 **BUY**: Emerald Green (`#10B981`) with soft glow.
   - 🔴 **SELL**: Crimson Red (`#EF4444`) with soft glow.
   - 🟡 **HOLD**: Amber Gold (`#F59E0B`) with soft glow.
+![Figure 5.3: Interactive Recharts Canvas with Minimal Modern Tooltip](figures/fig_5_3_minimal_tooltip.png)
+<div align="center"><b>Figure 5.3:</b> Interactive Recharts Canvas with Minimal Modern Tooltip</div>
+
 - **Ultra-Clean Minimal Tooltip**: When hovering over chart candles, a non-intrusive tooltip displays only the session date, percentage change pill, and settlement price, keeping the visual experience focused and clutter-free.
 - **Mobile Responsiveness**: Adaptive layouts collapse smoothly on screens under 1024px, converting the horizontal navigation bar into a mobile drawer.
 
@@ -1159,6 +1123,10 @@ Retail stock trading is frequently approached through speculative gambling drive
 
 ### 6.4 SDG Mapping
 
+![Figure 6.1: Sustainable Development Goals (SDG) Alignment Framework](figures/fig_6_1_sdg_mapping.png)
+<div align="center"><b>Figure 6.1:</b> Sustainable Development Goals (SDG) Alignment Framework</div>
+
+
 #### 6.4.1 SDG 8: Decent Work and Economic Growth
 TradeMind AI supports Target 8.10 by strengthening the capacity of individuals to access financial education, understand capital market mechanics, and develop quantitative analytical skills that prepare them for careers in financial technology and data science.
 
@@ -1227,6 +1195,10 @@ The Random Forest classifier was evaluated across out-of-sample chronological te
 
 The model achieves a **78.4% out-of-sample test accuracy**, demonstrating strong predictive generalization without the overfitting typical of unconstrained deep learning models.
 
+![Figure 7.1: Confusion Matrix for Out-of-Sample Directional Classification](figures/fig_7_1_confusion_matrix.png)
+<div align="center"><b>Figure 7.1:</b> Confusion Matrix for Out-of-Sample Directional Classification</div>
+
+
 ---
 
 ### 7.6 Explainable AI Attribution Result
@@ -1257,6 +1229,10 @@ Table 7.2 presents performance results from a 6-month walk-forward backtest exec
 | **TradeMind AI ML Ensemble** | **₹1,00,000** | **₹1,29,620** | **+₹29,620** | **+29.62%** | **87.5%** | **-6.15%** |
 
 The ML Ensemble strategy achieved the highest net return (+29.62%) while maintaining the lowest maximum drawdown (-6.15%), proving that the **58% conviction threshold + 2-indicator safety net** effectively protects capital by staying in **HOLD** during choppy consolidation phases.
+
+![Figure 7.2: 6-Month Walk-Forward Equity Growth Curve vs. Baseline](figures/fig_7_2_equity_growth.png)
+<div align="center"><b>Figure 7.2:</b> 6-Month Walk-Forward Equity Growth Curve vs. Baseline</div>
+
 
 ---
 
@@ -1345,106 +1321,42 @@ The following enhancements are planned for future versions of the platform:
 # APPENDIX A: USER INTERFACE SNAPSHOTS
 
 ### Snapshot 1: Main Trading Dashboard with Interactive Stock Chart
-The primary dashboard presents an overview of portfolio capital, today's P/L, active exchange status (NSE/NASDAQ), real-time price tickers, interactive timeframe selectors (`1D`, `1W`, `1M`, `3M`, `6M`, `1Y`), and the stock selector pill bar.
+The primary dashboard presents an overview of portfolio capital, today's P/L, active exchange status (NSE/NASDAQ), real-time price tickers, interactive timeframe selectors (1D, 1W, 1M, 3M, 6M, 1Y), and the stock selector pill bar.
 
-```text
-+---------------------------------------------------------------------------------------------------+
-|  TRADEMIND AI        Markets  |  AI Analyst  |  Paper Trading  |  Portfolio  |  Backtest  | [₹1,00,000] |
-+---------------------------------------------------------------------------------------------------+
-|  [AAPL] [NVDA] [MSFT] [TSLA] [AMZN] [GOOGL] [RELIANCE] [TCS] [INFY] [HDFCBANK] [ICICIBANK] ...     |
-+---------------------------------------------------------------------------------------------------+
-|  PORTFOLIO VALUE: ₹1,00,000  |  TODAY'S P/L: +₹0.00  |  MARKET STATUS: OPEN (NSE)  |  RANDOM FOREST |
-+---------------------------------------------------------------------------------------------------+
-|  AAPL - Apple Inc.   $224.50 (+1.25%)                                                             |
-|  [1D] [1W] [1M] [3M] [6M] [1Y]  |  [Candles] [Bars] [Line] [Area]  |  [SMA20] [SMA50] [Volume]     |
-|  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  |
-|                                       /|       /\                                                 |
-|                         /\           / |  /\  /  \                                                |
-|                   /\   /  \  /\     /  | /  \/    \                                               |
-|                  /  \ /    \/  \   /   |/          \                                              |
-|                 /    V          \_/                                                               |
-+---------------------------------------------------------------------------------------------------+
-```
+![Figure A.1: Main Trading Dashboard with Real-Time Stock Chart and Pill Bar](figures/fig_A_1_dashboard.png)
+<div align="center"><b>Figure A.1:</b> Main Trading Dashboard with Real-Time Stock Chart and Pill Bar</div>
 
 ---
 
 ### Snapshot 2: AI Market Signal Card with Explainable AI Reasons
 The AI Market Signal Card displays the synthesized directional signal (🟢 BUY, 🔴 SELL, or 🟡 HOLD), confidence score, and the dynamic Explainable AI checklist mapping current indicator states to human-readable rationale.
 
-```text
-+---------------------------------------------------------------------------------------------------+
-|  AI MARKET SIGNAL & EXPLAINABLE REASONS                                                           |
-+---------------------------------------------------------------------------------------------------+
-|  SIGNAL: 🟢 BUY                                       MODEL: Random Forest (100 Decision Trees)   |
-|  CONFIDENCE: 78.4% (High Conviction)                  PROBABILITY: 78.4% UP / 21.6% DOWN          |
-+---------------------------------------------------------------------------------------------------+
-|  EXPLAINABLE AI (XAI) REASONING CHECKLIST:                                                        |
-|  • Price ($224.50) is trading above SMA20 ($221.80) indicating positive short-term trend.         |
-|  • SMA20 is above SMA50 (+1.56% gap showing bullish structural alignment).                        |
-|  • MACD histogram is positive (+0.35) confirming upward momentum acceleration.                    |
-|  • RSI (58.4) indicates steady buying accumulation without entering overbought risk (> 72).       |
-|  • Random Forest ML model assigns 78.4% statistical probability to next-period upward movement.   |
-+---------------------------------------------------------------------------------------------------+
-```
+![Figure A.2: AI Market Signal Card with Explainable AI Technical Reasons Checklist](figures/fig_A_2_signal_card.png)
+<div align="center"><b>Figure A.2:</b> AI Market Signal Card with Explainable AI Technical Reasons Checklist</div>
 
 ---
 
 ### Snapshot 3: Ultra-Clean Chart Hover Tooltip
 Hovering over any candle on the interactive chart opens a minimal, non-intrusive tooltip displaying only the timestamp, price, and percentage change.
 
-```text
-+-------------------------------------------------------+
-|                 [ CANDLESTICK HOVER ]                 |
-|                                                       |
-|             +---------------------------+             |
-|             | 2026-10-23        +0.63%  |             |
-|             | $342.94                   |             |
-|             +---------------------------+             |
-|                                                       |
-+-------------------------------------------------------+
-```
+![Figure A.3: Interactive Multi-Timeframe Candlestick Chart with Clean Tooltip](figures/fig_A_3_clean_tooltip.png)
+<div align="center"><b>Figure A.3:</b> Interactive Multi-Timeframe Candlestick Chart with Clean Tooltip</div>
 
 ---
 
 ### Snapshot 4: Virtual Paper Trading Terminal & Holdings Ledger
 The paper trading terminal enables instantaneous virtual execution with balance validation, position tracking, and live profit-and-loss calculation.
 
-```text
-+-------------------------------------------------------+-------------------------------------------+
-|  QUICK TRADE EXECUTION FORM                           |  ACTIVE HOLDINGS PORTFOLIO LEDGER         |
-+-------------------------------------------------------+-------------------------------------------+
-|  Action:  [ BUY ]   [ SELL ]                          |  RELIANCE: 10 Shares @ ₹2,980.00          |
-|  Symbol:  RELIANCE                                    |  Current Value: ₹30,250.00 (+₹450.00)     |
-|  Quantity: [  10  ] Shares                            |                                           |
-|  Price per share: ₹3,025.00                           |  AAPL: 5 Shares @ $220.00                 |
-|  Total Order Cost: ₹30,250.00                         |  Current Value: $1,122.50 (+$22.50)       |
-|  Available Virtual Cash: ₹1,00,000.00                 |                                           |
-|  [ SUBMIT VIRTUAL ORDER ]                             |  TOTAL UNREALIZED P/L: +₹2,310.00 (+2.3%) |
-+-------------------------------------------------------+-------------------------------------------+
-```
+![Figure A.4: Paper Trading Terminal with Order Form and Holdings Portfolio Ledger](figures/fig_A_4_paper_terminal.png)
+<div align="center"><b>Figure A.4:</b> Paper Trading Terminal with Order Form and Holdings Portfolio Ledger</div>
 
 ---
 
 ### Snapshot 5: Quantitative Walk-Forward Backtesting Laboratory
 The backtest lab displays strategy simulation parameters alongside the historical equity growth curve, win rate %, and maximum drawdown statistics.
 
-```text
-+---------------------------------------------------------------------------------------------------+
-|  QUANTITATIVE BACKTESTING LABORATORY                                                              |
-+---------------------------------------------------------------------------------------------------+
-|  Strategy: [ ML Ensemble Strategy ]   Symbol: [ NVDA ]   Timeframe: [ 6 Months ]   [ RUN BACKTEST ] |
-+---------------------------------------------------------------------------------------------------+
-|  NET PROFIT: +₹29,620.00   |   TOTAL RETURN: +29.62%   |   WIN RATE: 87.5%   |   MAX DRAWDOWN: -6.15% |
-+---------------------------------------------------------------------------------------------------+
-|  PORTFOLIO EQUITY GROWTH CURVE (₹)                                                                |
-|  ₹1,30,000 |                                                                 .----* (₹1,29,620)   |
-|  ₹1,20,000 |                                                .----.          /                     |
-|  ₹1,10,000 |                                   .----.      /      \        /                      |
-|  ₹1,00,000 |*---------------------------------/      \----/        \------/                       |
-|            +------------------------------------------------------------------------------------+ |
-|             Month 1        Month 2        Month 3        Month 4        Month 5        Month 6    |
-+---------------------------------------------------------------------------------------------------+
-```
+![Figure A.5: Quantitative Backtesting Lab with Growth Curve and Performance Metrics](figures/fig_A_5_backtest_lab.png)
+<div align="center"><b>Figure A.5:</b> Quantitative Backtesting Lab with Growth Curve and Performance Metrics</div>
 
 ---
 <div style="page-break-after: always;"></div>

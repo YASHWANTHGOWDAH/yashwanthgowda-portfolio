@@ -153,6 +153,49 @@ def generate_docx():
             i += 1
             continue
 
+        # Handle Images & Flowchart Figures: ![Caption](path)
+        img_match = re.match(r'^!\[(.*?)\]\((.*?)\)', stripped)
+        if img_match:
+            caption = img_match.group(1).strip()
+            img_rel_path = img_match.group(2).strip()
+            img_full_path = os.path.normpath(os.path.join(DOCS_DIR, img_rel_path))
+
+            if os.path.exists(img_full_path):
+                # Add picture centered
+                p_img = doc.add_paragraph()
+                p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_img.paragraph_format.space_before = Pt(10)
+                p_img.paragraph_format.space_after = Pt(4)
+                p_img.paragraph_format.keep_with_next = True
+                
+                run_img = p_img.add_run()
+                run_img.add_picture(img_full_path, width=Inches(5.7))
+
+                # Add figure caption centered below
+                p_cap = doc.add_paragraph()
+                p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p_cap.paragraph_format.space_before = Pt(2)
+                p_cap.paragraph_format.space_after = Pt(12)
+                run_cap = p_cap.add_run(caption)
+                run_cap.font.name = 'Times New Roman'
+                run_cap.font.size = Pt(10)
+                run_cap.font.italic = True
+                run_cap.font.bold = True
+                run_cap.font.color.rgb = RGBColor(0x1e, 0x29, 0x3b)
+            else:
+                print(f"WARNING: Image not found at {img_full_path}")
+
+            i += 1
+            # If next line is a redundant <div align="center">...</div> caption, skip it
+            if i < len(lines) and ("Figure " in lines[i] or "<b>Figure" in lines[i] or "<i>Figure" in lines[i]):
+                i += 1
+            continue
+
+        # Skip redundant html caption divs if they appear standalone
+        if re.match(r'^<div align="center"><b>Figure\s+.*?</div>$', stripped) or re.match(r'^<div align="center"><i>Figure\s+.*?</div>$', stripped):
+            i += 1
+            continue
+
         # Handle Markdown Tables
         if stripped.startswith("|") and stripped.endswith("|"):
             table_lines = []
@@ -265,20 +308,15 @@ def generate_docx():
 
         # Handle Horizontal Rules
         if stripped in ["---", "***", "___"]:
-            # Small dividing space
             i += 1
             continue
 
-        # Handle empty lines
+        # Handle empty lines & html tags
         if not stripped or stripped in ["<br>", "<br/>", "<br><br>", "<br><br><br>"]:
             i += 1
             continue
 
-        # Handle HTML alignment tags
-        if stripped.startswith("<div align=\"center\">") or stripped == "<div align=\"center\">":
-            i += 1
-            continue
-        if stripped == "</div>":
+        if stripped.startswith("<div align=\"center\">") or stripped == "<div align=\"center\">" or stripped == "</div>":
             i += 1
             continue
 
@@ -290,7 +328,7 @@ def generate_docx():
         p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
         # Check if list item
-        if stripped.startswith("- ") or stripped.startswith("* "):
+        if stripped.startswith("- ") or stripped.startswith("* ") or stripped.startswith("• "):
             p.paragraph_format.left_indent = Inches(0.25)
             content = stripped[2:].strip()
             run_bullet = p.add_run("• ")
@@ -315,17 +353,22 @@ def generate_docx():
 
     # Copy to user's Windows Downloads folder
     dl_docx = os.path.join(DOWNLOADS_DIR, "FINAL_PROJECT_REPORT_BIS786.docx")
-    shutil.copyfile(DOCX_PATH, dl_docx)
-    print(f"Copied docx to: {dl_docx}")
+    try:
+        shutil.copyfile(DOCX_PATH, dl_docx)
+        print(f"Copied docx to: {dl_docx}")
+    except Exception as e:
+        print(f"Notice copying to downloads: {e}")
 
     # Copy to frontend public folder
     fe_docx = os.path.join(FRONTEND_PUBLIC, "FINAL_PROJECT_REPORT_BIS786.docx")
-    shutil.copyfile(DOCX_PATH, fe_docx)
-    print(f"Copied docx to: {fe_docx}")
+    try:
+        shutil.copyfile(DOCX_PATH, fe_docx)
+        print(f"Copied docx to: {fe_docx}")
+    except Exception as e:
+        print(f"Notice copying to frontend public: {e}")
 
 def parse_inline_formatting(paragraph, text):
     """Parse basic markdown bold (**), italic (*), and code (`) runs."""
-    # Pattern to match bold, italic, code
     token_pattern = re.compile(r'(\*\*.*?\*\*|\*.*?\*|`.*?`)')
     parts = token_pattern.split(text)
 

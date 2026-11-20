@@ -170,6 +170,18 @@ pre code {
     font-size: inherit;
 }
 
+img {
+    display: block;
+    max-width: 92%;
+    max-height: 5.2in;
+    height: auto;
+    margin: 12pt auto 6pt auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    page-break-inside: avoid;
+}
+
 blockquote {
     border-left: 3px solid #3b82f6;
     margin: 10pt 0;
@@ -208,24 +220,7 @@ hr {
     text-align: right;
 }
 
-.mermaid {
-    text-align: center;
-    margin: 14pt 0;
-    page-break-inside: avoid;
-}
-
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            mermaid.initialize({
-                startOnLoad: true,
-                theme: 'neutral',
-                securityLevel: 'loose',
-                flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
-            });
-        });
-    </script>
 </head>
 <body>
 <h1>VISVESVARAYA TECHNOLOGICAL UNIVERSITY</h1>
@@ -1111,6 +1106,9 @@ hr {
 <div class="page-break"></div>
 <h1>CHAPTER 1: INTRODUCTION</h1>
 <h3>1.1 Overview</h3>
+<p><img alt="Figure 1.1: Overview of Intelligent Trading Bot with Real-Time Market Data Analysis" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_1_1_system_overview.png" /></p>
+<div align="center"><b>Figure 1.1:</b> Overview of Intelligent Trading Bot with Real-Time Market Data Analysis</div>
+
 <p>Financial equity markets represent one of the most critical sectors of the modern global economy, enabling capital mobilization, corporate investment, and wealth generation. Over the last three decades, digital transformation has fundamentally reshaped equity trading from physical trading floors to high-frequency, distributed electronic communication networks. Today, algorithmic trading models drive over 70% of total trading volume across developed equity exchanges and an increasing proportion in emerging markets like India.</p>
 <p>However, the rapid computational advancement of financial markets has not translated into proportional accessibility for everyday retail market participants, university students, and independent quantitative researchers. Retail market participants encounter severe cognitive barriers, high analytical complexity, and immediate capital risk when interacting with financial markets. Most contemporary market tools fall into two extreme paradigms:
 1. <strong>Oversimplified rule-based charting interfaces</strong> (e.g., standard moving average crossovers) that fail to capture complex, multi-factor market conditions; and
@@ -1561,16 +1559,8 @@ hr {
 <h3>3.5 System Workflow</h3>
 <p>The overall workflow follows a sequential, event-driven pipeline:
 $$\text{Stock Selection} \rightarrow \text{Data Ingestion \&amp; Caching} \rightarrow \text{Feature Computation} \rightarrow \text{Chronological Split} \rightarrow \text{Random Forest Fitting} \rightarrow \text{Probability Estimation} \rightarrow \text{Dual-Conviction Rule Evaluation} \rightarrow \text{XAI Reason Mapping} \rightarrow \text{UI Rendering} \rightarrow \text{Paper Trade Execution / Backtest}$$</p>
-<div class="mermaid">
-flowchart LR
-    A["Raw Financial Feed<br>(NSE / NASDAQ)"] --> B["13-Feature Engineering<br>(SMA, RSI, MACD, Vol)"]
-    B --> C["Chronological Split<br>(80% Train / 20% Test)"]
-    C --> D["Random Forest Model<br>(100 Decision Trees)"]
-    D --> E["Dual-Conviction Engine<br>(58% Thresh + Technicals)"]
-    E --> F["Explainable AI (XAI)<br>Reason Generator"]
-    F --> G["React 19 Fintech UI<br>(Dashboard & Paper Trading)"]
-</div>
-<div align="center"><b>Figure 3.1: End-to-End System Processing and Signal Generation Pipeline</b></div>
+<p><img alt="Figure 3.1: End-to-End System Processing and Signal Generation Pipeline" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_3_1_workflow_pipeline.png" /></p>
+<div align="center"><b>Figure 3.1:</b> End-to-End System Processing and Signal Generation Pipeline</div>
 
 <hr />
 <h3>3.6 AI-Based Market Analysis</h3>
@@ -1615,6 +1605,9 @@ flowchart LR
 - <strong>Audit Logging</strong>: Logs every execution immutably into the MongoDB <code>trades</code> collection with the active AI signal at the exact moment of execution (<code>ai_signal_at_trade</code>).</p>
 <hr />
 <h3>3.12 Dual-Timezone Exchange Operating Logic (NSE &amp; NASDAQ)</h3>
+<p><img alt="Figure 5.2: Exchange-Aware Dual Timezone Clock Workflow (NSE &amp; NASDAQ)" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_5_2_dual_timezone.png" /></p>
+<div align="center"><b>Figure 5.2:</b> Exchange-Aware Dual Timezone Clock Workflow (NSE & NASDAQ)</div>
+
 <p>The platform dynamically tracks the operating sessions of two major financial exchanges:
 - <strong>National Stock Exchange of India (NSE)</strong>: Operates Monday through Friday, <strong>9:15 AM to 3:30 PM Indian Standard Time (<code>Asia/Kolkata</code>)</strong>.
 - <strong>NASDAQ (US Equities)</strong>: Operates Monday through Friday, <strong>9:30 AM to 4:00 PM Eastern Time (<code>America/New_York</code>)</strong>.</p>
@@ -1645,20 +1638,9 @@ flowchart LR
 <hr />
 <h3>4.2 Random Forest Classifier Architecture (100 Decision Trees)</h3>
 <p>The Random Forest algorithm is an ensemble bagging method that builds $B = 100$ independent decision trees during training. Each tree is trained on a bootstrap sample drawn with replacement from the historical feature matrix $X \in \mathbb{R}^{N \times 13}$.</p>
-<div class="mermaid">
-flowchart TD
-    A["13 Scaled Technical Features ($X_t$)"] --> B["Bootstrap Sampling (Bagging)"]
-    B --> T1["Decision Tree #1"]
-    B --> T2["Decision Tree #2"]
-    B --> T3["Decision Tree #..."]
-    B --> T100["Decision Tree #100"]
-    T1 --> V["Ensemble Majority Voting & Averaging"]
-    T2 --> V
-    T3 --> V
-    T100 --> V
-    V --> P1["$P(UP) = \frac{1}{100} \sum I(T_b = 1)$"]
-    V --> P2["$P(DOWN) = 1 - P(UP)$"]
-</div>
+<p><img alt="Figure 4.1: Random Forest 100-Tree Ensemble Voting &amp; Gini Impurity Structure" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_4_1_random_forest.png" /></p>
+<div align="center"><b>Figure 4.1:</b> Random Forest 100-Tree Ensemble Voting & Gini Impurity Structure</div>
+
 <div align="center"><b>Figure 4.1: Random Forest 100-Tree Ensemble Voting & Gini Impurity Structure</b></div>
 
 <h4>4.2.1 Splitting Criterion: Gini Impurity</h4>
@@ -1699,14 +1681,8 @@ $$\text{MACD Hist}_t = \text{MACD Line}_t - \text{Signal Line}_t$$</p>
    $$\text{Importance}(f) = \frac{1}{100} \sum_{b=1}^{100} \sum_{n \in T_b, v(n)=f} \Delta \text{Gini}(n)$$
    Ranked feature importances are returned to the user interface to show which indicators exerted the greatest influence on the model.
 2. <strong>Local Natural Language Attribution</strong>: Evaluates the specific feature values of the current live candle against technical thresholds to produce human-readable explanation bullet points (e.g., <em>"Price is above SMA20"</em>, <em>"MACD histogram is positive confirming momentum"</em>, <em>"RSI indicates steady buying without overbought risk"</em>).</p>
-<div class="mermaid">
-flowchart LR
-    A["Raw Feature Values<br>(Price, SMA, RSI, MACD)"] --> B["Rule Mapping Engine"]
-    C["Random Forest<br>Class Probabilities"] --> B
-    D["Gini Feature<br>Importances"] --> B
-    B --> E["Explainable AI Checklist<br>• Price > SMA20 (Bullish trend)<br>• MACD Hist +0.42 (Acceleration)<br>• Model Conviction: 78.4% UP"]
-</div>
-<div align="center"><b>Figure 4.2: Explainable AI (XAI) Feature Attribution and Reason Mapping Flow</b></div>
+<p><img alt="Figure 4.2: Explainable AI (XAI) Feature Attribution and Reason Mapping Flow" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_4_2_xai_attribution.png" /></p>
+<div align="center"><b>Figure 4.2:</b> Explainable AI (XAI) Feature Attribution and Reason Mapping Flow</div>
 
 <hr />
 <h3>4.6 AI Model Comparison Table</h3>
@@ -1781,33 +1757,8 @@ flowchart LR
 <h1>CHAPTER 5: DESIGN AND IMPLEMENTATION</h1>
 <h3>5.1 System Architecture (Major Layers)</h3>
 <p>The platform follows a layered architectural pattern that decouples data ingestion, quantitative computation, machine learning inference, and user presentation:</p>
-<div class="mermaid">
-flowchart TD
-    subgraph L1 ["1. Data Ingestion & Persistence Layer"]
-        YF["Yahoo Finance API"] --> INGEST["Market Data Ingestion Service"]
-        GBM["Geometric Brownian Motion Fallback"] --> INGEST
-        INGEST --> MONGO[("MongoDB Database: trademind_ai")]
-    end
-
-    subgraph L2 ["2. Service & Quantitative Layer"]
-        MONGO <--> CACHE["Asynchronous Cache & TTL Validator"]
-        CACHE --> FEAT["13-Feature Engineering Pipeline"]
-        FEAT --> ML["Random Forest Model (100 Trees)"]
-        FEAT & ML --> SIG["Dual-Conviction Signal Engine"]
-        SIG --> XAI["Explainable AI (XAI) Reason Generator"]
-        SIG & MONGO <--> PAPER["Paper Trading Portfolio Engine"]
-        FEAT & SIG <--> BACKTEST["Walk-Forward Backtesting Lab"]
-    end
-
-    subgraph L3 ["3. API Gateway & Presentation Layer"]
-        API["FastAPI REST Routes (/api/*)"]
-        SIG & XAI & PAPER & BACKTEST --> API
-        API <--> DASH["React 19 Fintech Dashboard"]
-        API <--> TERM["Paper Trading Execution Terminal"]
-        API <--> LAB["Backtesting Simulation Studio"]
-    end
-</div>
-<div align="center"><b>Figure 5.1: Layered Multi-Tier System Architecture (Data, App, AI, UI)</b></div>
+<p><img alt="Figure 5.1: Layered Multi-Tier System Architecture (Data, App, AI, UI)" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_5_1_system_architecture.png" /></p>
+<div align="center"><b>Figure 5.1:</b> Layered Multi-Tier System Architecture (Data, App, AI, UI)</div>
 
 <hr />
 <h3>5.2 User Interface Design</h3>
@@ -1817,8 +1768,13 @@ flowchart TD
   - 🟢 <strong>BUY</strong>: Emerald Green (<code>#10B981</code>) with soft glow.
   - 🔴 <strong>SELL</strong>: Crimson Red (<code>#EF4444</code>) with soft glow.
   - 🟡 <strong>HOLD</strong>: Amber Gold (<code>#F59E0B</code>) with soft glow.
-- <strong>Ultra-Clean Minimal Tooltip</strong>: When hovering over chart candles, a non-intrusive tooltip displays only the session date, percentage change pill, and settlement price, keeping the visual experience focused and clutter-free.
-- <strong>Mobile Responsiveness</strong>: Adaptive layouts collapse smoothly on screens under 1024px, converting the horizontal navigation bar into a mobile drawer.</p>
+<img alt="Figure 5.3: Interactive Recharts Canvas with Minimal Modern Tooltip" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_5_3_minimal_tooltip.png" /></p>
+<div align="center"><b>Figure 5.3:</b> Interactive Recharts Canvas with Minimal Modern Tooltip</div>
+
+<ul>
+<li><strong>Ultra-Clean Minimal Tooltip</strong>: When hovering over chart candles, a non-intrusive tooltip displays only the session date, percentage change pill, and settlement price, keeping the visual experience focused and clutter-free.</li>
+<li><strong>Mobile Responsiveness</strong>: Adaptive layouts collapse smoothly on screens under 1024px, converting the horizontal navigation bar into a mobile drawer.</li>
+</ul>
 <hr />
 <h3>5.3 Session State &amp; Portfolio State Management</h3>
 <p>Application state is managed using React hooks (<code>useState</code>, <code>useEffect</code>, <code>useMemo</code>):
@@ -1937,6 +1893,9 @@ $$\text{Drawdown}_t = \frac{\text{Peak}_t - \text{Equity}_t}{\text{Peak}_t}, \qu
 <p>Retail stock trading is frequently approached through speculative gambling driven by social media tips. TradeMind AI promotes disciplined, evidence-based decision-making by requiring empirical technical confirmation before recommending any market action.</p>
 <hr />
 <h3>6.4 SDG Mapping</h3>
+<p><img alt="Figure 6.1: Sustainable Development Goals (SDG) Alignment Framework" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_6_1_sdg_mapping.png" /></p>
+<div align="center"><b>Figure 6.1:</b> Sustainable Development Goals (SDG) Alignment Framework</div>
+
 <h4>6.4.1 SDG 8: Decent Work and Economic Growth</h4>
 <p>TradeMind AI supports Target 8.10 by strengthening the capacity of individuals to access financial education, understand capital market mechanics, and develop quantitative analytical skills that prepare them for careers in financial technology and data science.</p>
 <h4>6.4.2 SDG 9: Industry, Innovation and Infrastructure</h4>
@@ -2039,6 +1998,9 @@ $$\text{Drawdown}_t = \frac{\text{Peak}_t - \text{Equity}_t}{\text{Peak}_t}, \qu
 </tbody>
 </table>
 <p>The model achieves a <strong>78.4% out-of-sample test accuracy</strong>, demonstrating strong predictive generalization without the overfitting typical of unconstrained deep learning models.</p>
+<p><img alt="Figure 7.1: Confusion Matrix for Out-of-Sample Directional Classification" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_7_1_confusion_matrix.png" /></p>
+<div align="center"><b>Figure 7.1:</b> Confusion Matrix for Out-of-Sample Directional Classification</div>
+
 <hr />
 <h3>7.6 Explainable AI Attribution Result</h3>
 <p>For every generated signal, the system produces a verified natural language checklist. For example, during a bullish setup on <code>AAPL</code>, the AI Market Signal Card displays:
@@ -2106,6 +2068,9 @@ $$\text{Drawdown}_t = \frac{\text{Peak}_t - \text{Equity}_t}{\text{Peak}_t}, \qu
 </tbody>
 </table>
 <p>The ML Ensemble strategy achieved the highest net return (+29.62%) while maintaining the lowest maximum drawdown (-6.15%), proving that the <strong>58% conviction threshold + 2-indicator safety net</strong> effectively protects capital by staying in <strong>HOLD</strong> during choppy consolidation phases.</p>
+<p><img alt="Figure 7.2: 6-Month Walk-Forward Equity Growth Curve vs. Baseline" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_7_2_equity_growth.png" /></p>
+<div align="center"><b>Figure 7.2:</b> 6-Month Walk-Forward Equity Growth Curve vs. Baseline</div>
+
 <hr />
 <h3>7.9 Performance Discussion</h3>
 <p>Table 7.3 summarizes system response latency benchmarks captured across 100 consecutive API operations.</p>
@@ -2223,92 +2188,33 @@ $$\text{Drawdown}_t = \frac{\text{Peak}_t - \text{Equity}_t}{\text{Peak}_t}, \qu
 <div class="page-break"></div>
 <h1>APPENDIX A: USER INTERFACE SNAPSHOTS</h1>
 <h3>Snapshot 1: Main Trading Dashboard with Interactive Stock Chart</h3>
-<p>The primary dashboard presents an overview of portfolio capital, today's P/L, active exchange status (NSE/NASDAQ), real-time price tickers, interactive timeframe selectors (<code>1D</code>, <code>1W</code>, <code>1M</code>, <code>3M</code>, <code>6M</code>, <code>1Y</code>), and the stock selector pill bar.</p>
-<div class="codehilite"><pre><span></span><code>+---------------------------------------------------------------------------------------------------+
-|  TRADEMIND AI        Markets  |  AI Analyst  |  Paper Trading  |  Portfolio  |  Backtest  | [₹1,00,000] |
-+---------------------------------------------------------------------------------------------------+
-|  [AAPL] [NVDA] [MSFT] [TSLA] [AMZN] [GOOGL] [RELIANCE] [TCS] [INFY] [HDFCBANK] [ICICIBANK] ...     |
-+---------------------------------------------------------------------------------------------------+
-|  PORTFOLIO VALUE: ₹1,00,000  |  TODAY&#39;S P/L: +₹0.00  |  MARKET STATUS: OPEN (NSE)  |  RANDOM FOREST |
-+---------------------------------------------------------------------------------------------------+
-|  AAPL - Apple Inc.   $224.50 (+1.25%)                                                             |
-|  [1D] [1W] [1M] [3M] [6M] [1Y]  |  [Candles] [Bars] [Line] [Area]  |  [SMA20] [SMA50] [Volume]     |
-|  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  |
-|                                       /|       /\                                                 |
-|                         /\           / |  /\  /  \                                                |
-|                   /\   /  \  /\     /  | /  \/    \                                               |
-|                  /  \ /    \/  \   /   |/          \                                              |
-|                 /    V          \_/                                                               |
-+---------------------------------------------------------------------------------------------------+
-</code></pre></div>
+<p>The primary dashboard presents an overview of portfolio capital, today's P/L, active exchange status (NSE/NASDAQ), real-time price tickers, interactive timeframe selectors (1D, 1W, 1M, 3M, 6M, 1Y), and the stock selector pill bar.</p>
+<p><img alt="Figure A.1: Main Trading Dashboard with Real-Time Stock Chart and Pill Bar" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_A_1_dashboard.png" /></p>
+<div align="center"><b>Figure A.1:</b> Main Trading Dashboard with Real-Time Stock Chart and Pill Bar</div>
 
 <hr />
 <h3>Snapshot 2: AI Market Signal Card with Explainable AI Reasons</h3>
 <p>The AI Market Signal Card displays the synthesized directional signal (🟢 BUY, 🔴 SELL, or 🟡 HOLD), confidence score, and the dynamic Explainable AI checklist mapping current indicator states to human-readable rationale.</p>
-<div class="codehilite"><pre><span></span><code>+---------------------------------------------------------------------------------------------------+
-|  AI MARKET SIGNAL &amp; EXPLAINABLE REASONS                                                           |
-+---------------------------------------------------------------------------------------------------+
-|  SIGNAL: 🟢 BUY                                       MODEL: Random Forest (100 Decision Trees)   |
-|  CONFIDENCE: 78.4% (High Conviction)                  PROBABILITY: 78.4% UP / 21.6% DOWN          |
-+---------------------------------------------------------------------------------------------------+
-|  EXPLAINABLE AI (XAI) REASONING CHECKLIST:                                                        |
-|  • Price ($224.50) is trading above SMA20 ($221.80) indicating positive short-term trend.         |
-|  • SMA20 is above SMA50 (+1.56% gap showing bullish structural alignment).                        |
-|  • MACD histogram is positive (+0.35) confirming upward momentum acceleration.                    |
-|  • RSI (58.4) indicates steady buying accumulation without entering overbought risk (&gt; 72).       |
-|  • Random Forest ML model assigns 78.4% statistical probability to next-period upward movement.   |
-+---------------------------------------------------------------------------------------------------+
-</code></pre></div>
+<p><img alt="Figure A.2: AI Market Signal Card with Explainable AI Technical Reasons Checklist" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_A_2_signal_card.png" /></p>
+<div align="center"><b>Figure A.2:</b> AI Market Signal Card with Explainable AI Technical Reasons Checklist</div>
 
 <hr />
 <h3>Snapshot 3: Ultra-Clean Chart Hover Tooltip</h3>
 <p>Hovering over any candle on the interactive chart opens a minimal, non-intrusive tooltip displaying only the timestamp, price, and percentage change.</p>
-<div class="codehilite"><pre><span></span><code>+-------------------------------------------------------+
-|                 [ CANDLESTICK HOVER ]                 |
-|                                                       |
-|             +---------------------------+             |
-|             | 2026-10-23        +0.63%  |             |
-|             | $342.94                   |             |
-|             +---------------------------+             |
-|                                                       |
-+-------------------------------------------------------+
-</code></pre></div>
+<p><img alt="Figure A.3: Interactive Multi-Timeframe Candlestick Chart with Clean Tooltip" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_A_3_clean_tooltip.png" /></p>
+<div align="center"><b>Figure A.3:</b> Interactive Multi-Timeframe Candlestick Chart with Clean Tooltip</div>
 
 <hr />
 <h3>Snapshot 4: Virtual Paper Trading Terminal &amp; Holdings Ledger</h3>
 <p>The paper trading terminal enables instantaneous virtual execution with balance validation, position tracking, and live profit-and-loss calculation.</p>
-<div class="codehilite"><pre><span></span><code>+-------------------------------------------------------+-------------------------------------------+
-|  QUICK TRADE EXECUTION FORM                           |  ACTIVE HOLDINGS PORTFOLIO LEDGER         |
-+-------------------------------------------------------+-------------------------------------------+
-|  Action:  [ BUY ]   [ SELL ]                          |  RELIANCE: 10 Shares @ ₹2,980.00          |
-|  Symbol:  RELIANCE                                    |  Current Value: ₹30,250.00 (+₹450.00)     |
-|  Quantity: [  10  ] Shares                            |                                           |
-|  Price per share: ₹3,025.00                           |  AAPL: 5 Shares @ $220.00                 |
-|  Total Order Cost: ₹30,250.00                         |  Current Value: $1,122.50 (+$22.50)       |
-|  Available Virtual Cash: ₹1,00,000.00                 |                                           |
-|  [ SUBMIT VIRTUAL ORDER ]                             |  TOTAL UNREALIZED P/L: +₹2,310.00 (+2.3%) |
-+-------------------------------------------------------+-------------------------------------------+
-</code></pre></div>
+<p><img alt="Figure A.4: Paper Trading Terminal with Order Form and Holdings Portfolio Ledger" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_A_4_paper_terminal.png" /></p>
+<div align="center"><b>Figure A.4:</b> Paper Trading Terminal with Order Form and Holdings Portfolio Ledger</div>
 
 <hr />
 <h3>Snapshot 5: Quantitative Walk-Forward Backtesting Laboratory</h3>
 <p>The backtest lab displays strategy simulation parameters alongside the historical equity growth curve, win rate %, and maximum drawdown statistics.</p>
-<div class="codehilite"><pre><span></span><code>+---------------------------------------------------------------------------------------------------+
-|  QUANTITATIVE BACKTESTING LABORATORY                                                              |
-+---------------------------------------------------------------------------------------------------+
-|  Strategy: [ ML Ensemble Strategy ]   Symbol: [ NVDA ]   Timeframe: [ 6 Months ]   [ RUN BACKTEST ] |
-+---------------------------------------------------------------------------------------------------+
-|  NET PROFIT: +₹29,620.00   |   TOTAL RETURN: +29.62%   |   WIN RATE: 87.5%   |   MAX DRAWDOWN: -6.15% |
-+---------------------------------------------------------------------------------------------------+
-|  PORTFOLIO EQUITY GROWTH CURVE (₹)                                                                |
-|  ₹1,30,000 |                                                                 .----* (₹1,29,620)   |
-|  ₹1,20,000 |                                                .----.          /                     |
-|  ₹1,10,000 |                                   .----.      /      \        /                      |
-|  ₹1,00,000 |*---------------------------------/      \----/        \------/                       |
-|            +------------------------------------------------------------------------------------+ |
-|             Month 1        Month 2        Month 3        Month 4        Month 5        Month 6    |
-+---------------------------------------------------------------------------------------------------+
-</code></pre></div>
+<p><img alt="Figure A.5: Quantitative Backtesting Lab with Growth Curve and Performance Metrics" src="file:///c:/Users/yashw/Downloads/Yashwanth_Gowda_Portfolio/yashwanth-portfolio/TradeMind-AI/docs/figures/fig_A_5_backtest_lab.png" /></p>
+<div align="center"><b>Figure A.5:</b> Quantitative Backtesting Lab with Growth Curve and Performance Metrics</div>
 
 <hr />
 <div class="page-break"></div>

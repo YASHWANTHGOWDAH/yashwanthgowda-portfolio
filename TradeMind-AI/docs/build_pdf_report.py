@@ -25,9 +25,6 @@ with open(MD_PATH, "r", encoding="utf-8") as f:
     full_markdown_text = f.read()
 
 # Custom CSS matching VTU and Sai Vidya Institute of Technology formatting
-# Includes exact headers/footers:
-# Header: Intelligent Trading Bot with Real-Time Market Data Analysis | BIS786
-# Footer: Dept. of IS&E, SVIT | Page number
 REPORT_CSS = """
 @page {
     size: A4 portrait;
@@ -194,6 +191,18 @@ pre code {
     font-size: inherit;
 }
 
+img {
+    display: block;
+    max-width: 92%;
+    max-height: 5.2in;
+    height: auto;
+    margin: 12pt auto 6pt auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    page-break-inside: avoid;
+}
+
 blockquote {
     border-left: 3px solid #3b82f6;
     margin: 10pt 0;
@@ -231,25 +240,22 @@ hr {
 .right-text {
     text-align: right;
 }
-
-.mermaid {
-    text-align: center;
-    margin: 14pt 0;
-    page-break-inside: avoid;
-}
 """
 
 def markdown_to_styled_html(md_text, is_plagiarism_only=False):
     # Convert page breaks in markdown
     md_formatted = md_text.replace('<div style="page-break-after: always;"></div>', '<div class="page-break"></div>')
     
-    # Pre-render mermaid code blocks as <div class="mermaid">
-    def replace_mermaid(match):
-        code = match.group(1).strip()
-        return f'<div class="mermaid">\n{code}\n</div>'
-    
-    md_formatted = re.sub(r'```mermaid\s*\n(.*?)\n```', replace_mermaid, md_formatted, flags=re.DOTALL)
-    
+    # Ensure relative figure paths resolve to absolute file URIs for headless Chrome reliability
+    def fix_img_src(match):
+        alt = match.group(1)
+        rel_path = match.group(2)
+        full_p = os.path.normpath(os.path.join(DOCS_DIR, rel_path))
+        uri = "file:///" + full_p.replace(os.sep, "/")
+        return f'![{alt}]({uri})'
+
+    md_formatted = re.sub(r'!\[(.*?)\]\((figures/.*?)\)', fix_img_src, md_formatted)
+
     # Process with python-markdown
     md_extensions = ['tables', 'fenced_code', 'codehilite', 'sane_lists']
     html_body = markdown.markdown(md_formatted, extensions=md_extensions)
@@ -275,17 +281,6 @@ def markdown_to_styled_html(md_text, is_plagiarism_only=False):
     <style>
         {REPORT_CSS}
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {{
-            mermaid.initialize({{
-                startOnLoad: true,
-                theme: 'neutral',
-                securityLevel: 'loose',
-                flowchart: {{ useMaxWidth: true, htmlLabels: true, curve: 'basis' }}
-            }});
-        }});
-    </script>
 </head>
 <body>
 {html_body}
@@ -309,7 +304,7 @@ ref_start = full_markdown_text.find("# REFERENCES")
 if ch1_start != -1 and ref_start != -1:
     plag_text = full_markdown_text[ch1_start:ref_start].strip()
     plagiarism_header = """# INTELLIGENT TRADING BOT WITH REAL-TIME MARKET DATA ANALYSIS
-### Project Phase-II (BIS786) Report — Chapters 1 to 8 (Plagiarism Verification File)
+### Project Phase-II (BIS786) Report – Chapters 1 to 8 (Plagiarism Verification File)
 **Department:** Dept. of IS&E, SVIT  
 **Institution:** Sai Vidya Institute of Technology, Rajanukunte, Bengaluru – 560 064  
 **Affiliation:** Visvesvaraya Technological University (VTU), Belagavi  
@@ -339,7 +334,7 @@ def print_html_to_pdf(html_file, pdf_file):
         "--no-sandbox",
         "--no-pdf-header-footer",
         "--run-all-compositor-stages-before-draw",
-        "--virtual-time-budget=6000",
+        "--virtual-time-budget=8000",
         f"--print-to-pdf={pdf_abs}",
         html_uri
     ]
@@ -359,25 +354,33 @@ success_plag = print_html_to_pdf(HTML_PLAG_PATH, PDF_PLAG_PATH)
 
 # 4. Copy to Downloads directory and Frontend Public directory for 1-click download
 if success_full:
-    # Copy to user's Windows Downloads folder
     dl_full = os.path.join(DOWNLOADS_DIR, "FINAL_PROJECT_REPORT_BIS786.pdf")
-    shutil.copyfile(PDF_FULL_PATH, dl_full)
-    print(f"Copied full report PDF to: {dl_full}")
+    try:
+        shutil.copyfile(PDF_FULL_PATH, dl_full)
+        print(f"Copied full report PDF to: {dl_full}")
+    except Exception as e:
+        print(f"Notice: {e}")
 
-    # Copy to frontend public folder
     fe_full = os.path.join(FRONTEND_PUBLIC, "FINAL_PROJECT_REPORT_BIS786.pdf")
-    shutil.copyfile(PDF_FULL_PATH, fe_full)
-    print(f"Copied full report PDF to: {fe_full}")
+    try:
+        shutil.copyfile(PDF_FULL_PATH, fe_full)
+        print(f"Copied full report PDF to: {fe_full}")
+    except Exception as e:
+        print(f"Notice: {e}")
 
 if success_plag:
-    # Copy to user's Windows Downloads folder
     dl_plag = os.path.join(DOWNLOADS_DIR, "PLAGIARISM_CHECK_CHAPTERS_1_TO_8.pdf")
-    shutil.copyfile(PDF_PLAG_PATH, dl_plag)
-    print(f"Copied plagiarism check PDF to: {dl_plag}")
+    try:
+        shutil.copyfile(PDF_PLAG_PATH, dl_plag)
+        print(f"Copied plagiarism check PDF to: {dl_plag}")
+    except Exception as e:
+        print(f"Notice: {e}")
 
-    # Copy to frontend public folder
     fe_plag = os.path.join(FRONTEND_PUBLIC, "PLAGIARISM_CHECK_CHAPTERS_1_TO_8.pdf")
-    shutil.copyfile(PDF_PLAG_PATH, fe_plag)
-    print(f"Copied plagiarism check PDF to: {fe_plag}")
+    try:
+        shutil.copyfile(PDF_PLAG_PATH, fe_plag)
+        print(f"Copied plagiarism check PDF to: {fe_plag}")
+    except Exception as e:
+        print(f"Notice: {e}")
 
 print("PDF Build and Distribution Process Complete.")
